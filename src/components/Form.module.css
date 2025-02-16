@@ -7,6 +7,9 @@
 
 .form input[type="text"],
 .form select {
+  width: 100%; 
+  max-width: 400px;
+  min-width: 200px;
   padding: 1rem;
   background-color: transparent;
   border: 0.3rem solid var(--white);
@@ -15,7 +18,11 @@
   font-weight: 400;
   border-radius: 0.7rem;
   text-align: center;
+  box-sizing: border-box;
+  padding: 0.5rem 
+
 }
+
 
 .field ::placeholder {
   color: var(--white);
@@ -23,6 +30,7 @@
 
 .submit {
   background-color: var(--primary);
+  margin-top: 2rem;
   border: none;
   padding: 0.5rem;
   color: var(--white);
