@@ -1,13 +1,14 @@
 .title {
-  margin-left: 47%;
+  text-align: center; /* Centra el texto */
   font-size: 4rem;
   margin-top: 5rem;
   letter-spacing: 1.5rem;
 }
 
+/* Ajustar el contenedor */
 .container {
   width: 95%;
-  max-width: 10rem;
+  max-width: 1000px; /* Se amplía el ancho máximo */
   margin: 0 auto;
 }
 

@@ -4,12 +4,16 @@ import { countries } from "../data/countries";
 import styles from "../components/Form.module.css";
 import Alert from "../Alert/Alert";
 
-export default function Form() {
+type FormProps = {
+  fetchWeather: (search: SearchType) => Promise<void>;
+};
+
+export default function Form({ fetchWeather }: FormProps) {
   const [search, setSearch] = useState<SearchType>({
     country: "",
     city: "",
   });
-  const [alert, setAlert] = useState('')
+  const [alert, setAlert] = useState("");
   const handleChange = (
     e: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>
   ) => {
@@ -19,18 +23,16 @@ export default function Form() {
     });
   };
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    if(Object.values(search). includes('')){
-      setAlert('Todos los campos son obligatorios')
-      return
+    if (Object.values(search).includes("")) {
+      setAlert("Todos los campos son obligatorios");
+      return;
     }
-    
-  }
+    fetchWeather(search);
+  };
   return (
-    <form className={styles.form}
-    onSubmit={handleSubmit}
-    >
+    <form className={styles.form} onSubmit={handleSubmit}>
       <div className={styles.field}>
         <label htmlFor="country">País:</label>
         <select
