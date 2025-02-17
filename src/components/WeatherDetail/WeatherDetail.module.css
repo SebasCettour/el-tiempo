@@ -1,0 +1,31 @@
+.container {
+  background-color: var(--white);
+  color: #000;
+  border-radius: 1rem;
+  text-align: center;
+  padding: 1rem;
+}
+
+.current {
+  font-size: 3rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.temperatures {
+  display: flex;
+  justify-content: center;
+  gap: 5rem;
+}
+
+.span_max,
+.p_max {
+  color: #e94c4c;
+  font-weight: 800;
+}
+
+.span_min,
+.p_min {
+  color: #4ca0e9;
+  font-weight: 800;
+}
