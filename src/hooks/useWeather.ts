@@ -12,19 +12,26 @@ const WeatherSchema = z.object({
     temp_min: z.number(),
   }),
 });
-export type WeatherSchema= z.infer<typeof WeatherSchema>;
+export type WeatherSchema = z.infer<typeof WeatherSchema>;
+
+const initialState = {
+  name: "",
+  main: {
+    temp: 0,
+    temp_max: 0,
+    temp_min: 0,
+  },
+};
 
 export default function useWeather() {
-  const [weather, setWeather] = useState<WeatherSchema>({
-    name: '',
-    main: {
-      temp: 0,
-      temp_max:0,
-      temp_min: 0
-    }
-  })
+  const [weather, setWeather] = useState<WeatherSchema>(initialState)
+  const [loading, setLoading] = useState(false);
+
   const fetchWeather = async (search: SearchType) => {
     const appId = import.meta.env.VITE_API_KEY;
+
+    setLoading(true);
+    setWeather(initialState)
 
     try {
       const geoUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${search.city},${search.country}&appid=${appId}`;
@@ -37,18 +44,21 @@ export default function useWeather() {
       const { data: weatherResult } = await axios(weatherUrl);
       const result = WeatherSchema.safeParse(weatherResult);
       if (result.success) {
-       setWeather(result.data)
+        setWeather(result.data);
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
-  const hasWeatherData = useMemo(() => weather.name , [weather])
+  const hasWeatherData = useMemo(() => weather.name, [weather]);
 
   return {
     weather,
+    loading,
     fetchWeather,
-    hasWeatherData
+    hasWeatherData,
   };
 }
