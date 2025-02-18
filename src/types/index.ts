@@ -8,11 +8,12 @@ export type Country = {
     name: string
 }
 
-export type Wheathehr = {
+export type Wheather = {
   name: string
   main:{
     temp: number
     temp_max: number
     temp_min: number
+    wind_speed: number
   }
 }

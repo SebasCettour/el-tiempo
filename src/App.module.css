@@ -1,15 +1,52 @@
 .title {
-  text-align: center; /* Centra el texto */
+  text-align: center;
   font-size: 4rem;
   margin-top: 5rem;
   letter-spacing: 1.5rem;
 }
 
-/* Ajustar el contenedor */
 .container {
   width: 95%;
-  max-width: 1000px; /* Se amplía el ancho máximo */
+  max-width: 1000px;
   margin: 0 auto;
+}
+
+.toggleButton {
+  background: #ffffff33;
+  color: white;
+  letter-spacing: 3px;
+  border: none;
+  width: 180px;
+  height: 50px;
+  font-size: 2rem;
+  cursor: pointer;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  transition: background 0.3s ease;
+  position: absolute;
+  bottom: 430px;
+  left: 64%;
+  transform: translateX(-50%);
+}
+
+.toggleButton:hover {
+  background: #95919100;
+}
+
+.toggleButton:active {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.toggleButton:active {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.toggleButton span {
+  font-size: 20px;
+  font-weight: bold;
 }
 
 @media (min-width: 768px) {

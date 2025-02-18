@@ -1,0 +1,25 @@
+.container {
+  width: 95%;
+  max-width: 1000px;
+  background-color: var(--white);
+  opacity: 0.4;
+  color: #000;
+  border-radius: 1rem;
+  text-align: center;
+  padding: 1rem;
+  position: absolute;
+  top: 460px;
+  left: 64%;
+  transform: translateX(-50%);
+  width: 400px;
+  height: 200px;
+}
+
+.st,
+.humedad,
+.presion,
+.viento {
+  font-size: 3rem;
+  font-weight: 500;
+  margin: 0;
+}

@@ -1,5 +1,6 @@
 .container {
   background-color: var(--white);
+  opacity: 0.4;
   color: #000;
   border-radius: 1rem;
   text-align: center;
@@ -7,8 +8,8 @@
 }
 
 .current {
-  font-size: 3rem;
-  font-weight: 600;
+  font-size: 3.5rem;
+  font-weight: 500;
   margin: 0;
 }
 
@@ -20,12 +21,14 @@
 
 .span_max,
 .p_max {
-  color: #e94c4c;
-  font-weight: 800;
+  color: #f10808;
+  font-weight: 600;
+  font-size: 3rem;
 }
 
 .span_min,
 .p_min {
-  color: #4ca0e9;
-  font-weight: 800;
+  color: #0685f3;
+  font-weight: 600;
+  font-size: 3rem;
 }
