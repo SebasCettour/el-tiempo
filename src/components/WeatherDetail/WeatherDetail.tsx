@@ -11,7 +11,6 @@ export default function WeatherDetail({ weather }: WeatherDetailProps) {
     <div className={styles.container}>
       <h2>El tiempo en {weather.name}</h2>
 
-      {/* Bloque de descripción e ícono del clima */}
       {weather.weather.length > 0 && (
         <div>
           <p>{weather.weather[0].description}</p>

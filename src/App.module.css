@@ -9,10 +9,24 @@
   width: 95%;
   max-width: 1000px;
   margin: 0 auto;
+  position: relative;
 }
 
+
+.weatherContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+
 .toggleButton {
-  background: #ffffff33;
+  background: transparent;
   color: white;
   letter-spacing: 3px;
   border: none;
@@ -26,18 +40,15 @@
   justify-content: center;
   font-weight: bold;
   transition: background 0.3s ease;
-  position: absolute;
-  bottom: 350px;
-  left: 64%;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
   transform: translateX(-50%);
+  z-index: 10;
 }
 
 .toggleButton:hover {
-  background: #95919100;
-}
-
-.toggleButton:active {
-  background: rgba(255, 255, 255, 0.4);
+  background: #ffffff33;
 }
 
 .toggleButton:active {
@@ -47,14 +58,4 @@
 .toggleButton span {
   font-size: 20px;
   font-weight: bold;
-}
-
-@media (min-width: 768px) {
-  .container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    align-items: center;
-    gap: 4rem;
-    margin-top: 5rem;
-  }
 }

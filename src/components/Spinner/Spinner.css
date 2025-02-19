@@ -1,23 +1,25 @@
 .sk-cube-grid {
   width: 80px;
   height: 80px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Usamos grid para un mejor control */
+  grid-template-rows: repeat(3, 1fr); /* Asegura que el grid tenga 3 filas */
+  justify-content: center;
   align-items: center;
   gap: 4px;
   margin: 100px auto;
 }
 
 .sk-cube {
-  width: 30%;
-  height: 30%;
+  width: 100%;
+  height: 100%;
   background-color: #012130;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   border-radius: 4px;
   animation: sk-cubeGridScaleDelay 1.5s infinite ease-in-out;
 }
 
+/* Animación para los cubos con retrasos escalonados */
 .sk-cube:nth-child(1) { animation-delay: 0.1s; }
 .sk-cube:nth-child(2) { animation-delay: 0.2s; }
 .sk-cube:nth-child(3) { animation-delay: 0.3s; }
@@ -36,5 +38,21 @@
   50% {
     transform: scale(0.5);
     background-color: #6c79db;
+  }
+}
+
+/* Mejorando la accesibilidad para tamaños más pequeños */
+@media (max-width: 768px) {
+  .sk-cube-grid {
+    width: 60px; /* Reducimos el tamaño del spinner */
+    height: 60px;
+    margin: 50px auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .sk-cube-grid {
+    width: 50px; /* Ajustamos aún más el tamaño */
+    height: 50px;
   }
 }

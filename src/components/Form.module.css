@@ -1,29 +1,27 @@
-/* Formulario centrado */
 .form {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centra los elementos en el eje horizontal */
-  justify-content: center; /* Alinea el contenido verticalmente */
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  gap: 2rem; /* Espaciado entre los campos */
-  margin: 0 auto; /* Asegura que el formulario esté centrado */
-  max-width: 600px; /* Máximo ancho para el formulario */
+  max-width: 800px;
+  gap: 2rem;
+  margin: 0 auto;
+  padding: 1.5rem;
 }
 
-/* Ajustes para los campos */
 .field {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centra el contenido */
+  align-items: center;
   width: 100%;
 }
 
-/* Estilos de los inputs y selects */
 .form input[type="text"],
 .form select {
   width: 100%;
-  max-width: 500px; /* Asegura que el input y select no se expandan demasiado */
-  min-width: 280px; /* Ajusta el ancho mínimo */
+  max-width: 600px;
+  min-width: 280px;
   padding: 1rem;
   background-color: transparent;
   border: 0.3rem solid var(--white);
@@ -36,28 +34,67 @@
   appearance: none;
 }
 
-/* Estilo para las opciones del select */
 .form select option {
   background-color: #00293a8c;
   color: #000;
 }
 
-/* Estilo para los placeholders */
 .field ::placeholder {
   color: var(--white);
 }
 
-/* Estilo para el botón submit */
 .submit {
   background-color: var(--primary);
   margin-top: 2rem;
   border: none;
-  padding: 0.5rem;
+  padding: 0.8rem;
   color: var(--white);
   font-weight: 700;
   font-size: 1.4rem;
   text-transform: uppercase;
   cursor: pointer;
   border-radius: 0.7rem;
-  width: 100%;
+  width: 50%;
+}
+
+.submit:hover {
+  background-color: #f4f779;
+  color: #000;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .form {
+    width: 90%;
+    padding: 1rem;
+  }
+
+  .form input[type="text"],
+  .form select {
+    font-size: 1.6rem;
+    padding: 0.8rem;
+  }
+
+  .submit {
+    font-size: 1.2rem;
+    padding: 0.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .form {
+    width: 100%;
+    padding: 0.8rem;
+  }
+
+  .form input[type="text"],
+  .form select {
+    font-size: 1.4rem;
+    padding: 0.7rem;
+  }
+
+  .submit {
+    font-size: 1.1rem;
+    padding: 0.5rem;
+  }
 }

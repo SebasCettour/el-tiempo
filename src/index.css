@@ -16,3 +16,30 @@ body {
   color: var(--white);
   font-size: 2rem;
 }
+
+
+@media (max-width: 1200px) {
+  html {
+    font-size: 56.25%;
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 50%;
+  }
+
+  body {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 45%;
+  }
+
+  body {
+    font-size: 1.4rem;
+  }
+}

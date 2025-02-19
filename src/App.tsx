@@ -18,22 +18,19 @@ function App() {
       <h1 className={styles.title}>El tiempo</h1>
       <div className={styles.container}>
         <Form fetchWeather={fetchWeather} />
-
         {loading && <Spinner />}
-
-        {hasWeatherData && <WeatherDetail weather={weather} />}
-        
         {hasWeatherData && (
           <>
+            <div className={styles.weatherContainer}> {/* Aquí los envolvemos en weatherContainer */}
+              <WeatherDetail weather={weather} />
+              {showDetails && <MoreDetails weather={weather} />}
+            </div>
+
             <button className={styles.toggleButton} onClick={toggleDetails}>
               {showDetails ? "Ver menos -" : "Ver más +"}
             </button>
-
-            {/* Mostrar el componente MoreDetails solo si showDetails es verdadero */}
-            {showDetails && <MoreDetails weather={weather} />}
           </>
         )}
-
         {notFound && <Alert>Ciudad no encontrada</Alert>}
       </div>
     </>
