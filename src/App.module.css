@@ -27,7 +27,7 @@
   font-weight: bold;
   transition: background 0.3s ease;
   position: absolute;
-  bottom: 430px;
+  bottom: 350px;
   left: 64%;
   transform: translateX(-50%);
 }

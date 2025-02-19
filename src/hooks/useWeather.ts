@@ -5,6 +5,15 @@ import { useMemo, useState } from "react";
 
 //Zod
 const WeatherSchema = z.object({
+  weather: z.array(
+    z.object({
+      id: z.number(),
+      main: z.string(),
+      description: z.string(),
+      icon: z.string(),
+    })
+  ),
+
   name: z.string(),
   main: z.object({
     temp: z.number(),
@@ -13,11 +22,23 @@ const WeatherSchema = z.object({
     feels_like: z.number(),
     humidity: z.number(),
     pressure: z.number(),
-  
+  }),
+  wind: z.object({
+    speed: z.number(),
+    deg: z.number(),
+  }),
+
+  rain: z
+    .object({
+      "1h": z.number(),
+    })
+    .optional(),
+  clouds: z.object({
+    all: z.number(),
   }),
 });
-export type WeatherSchema = z.infer<typeof WeatherSchema>;
 
+export type WeatherSchema = z.infer<typeof WeatherSchema>;
 const initialState = {
   name: "",
   main: {
@@ -27,8 +48,25 @@ const initialState = {
     feels_like: 0,
     humidity: 0,
     pressure: 0,
-
   },
+  wind: {
+    speed: 0,
+    deg: 0,
+  },
+  rain: {
+    "1h": 0,
+  },
+  clouds: {
+    all: 0,
+  },
+  weather: [
+    {
+      id: 0,
+      main: "",
+      description: "",
+      icon: "",
+    },
+  ],
 };
 
 export default function useWeather() {
