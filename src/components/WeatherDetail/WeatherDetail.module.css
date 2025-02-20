@@ -1,18 +1,16 @@
-
 .container {
+  flex: 1;
   background-color: var(--white);
   opacity: 0.7;
   color: #000;
   border-radius: 1rem;
   text-align: center;
-  padding: 1rem;
-  margin-top: 20px;
-  width: 45%;
+  padding: 0.3rem;
+  width: 60rem;
   box-sizing: border-box;
-  position: relative;
-  z-index: 1;
+  margin-top: 0.5rem;
+  height: fit-content;
 }
-
 
 .current {
   font-size: 2.5rem;
@@ -33,11 +31,9 @@
   font-size: 2.5rem;
 }
 
-
 .span_min,
 .p_min {
   color: #0685f3;
   font-weight: 600;
   font-size: 2.5rem;
 }
-
