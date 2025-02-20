@@ -81,7 +81,7 @@ export default function useWeather() {
     setWeather(initialState);
 
     try {
-      const geoUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${search.city},${search.country}&appid=${appId}&lang=es`;
+      const geoUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${search.city},${search.country}&appid=${appId}`;
 
 
       const { data } = await axios(geoUrl);
@@ -93,7 +93,7 @@ export default function useWeather() {
       }
       const lat = data[0].lat;
       const lon = data[0].lon;
-      const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${appId}`;
+      const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=es&appid=${appId}`;
       const { data: weatherResult } = await axios(weatherUrl);
       const result = WeatherSchema.safeParse(weatherResult);
       if (result.success) {

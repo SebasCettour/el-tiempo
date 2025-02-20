@@ -5,20 +5,20 @@
   color: #000;
   border-radius: 1rem;
   text-align: center;
-  padding: 1rem;
+  padding: 0.3rem;
   width: 60rem;
   box-sizing: border-box;
-  margin-top: 4rem;
-
+  margin-top: 0.5rem;
+  height: fit-content;
 }
 
-
 .st,
-.humedad,
-.presion,
+.humidity,
+.pressure,
 .wind,
+.rain,
 .clouds {
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-weight: 500;
   margin: 0;
   margin-bottom: 1rem;
@@ -31,13 +31,14 @@
   }
 }
 
-.st,
-.humedad,
-.presion,
+.feels_like,
+.humidity,
+.pressure,
 .wind,
+.rain,
 .clouds {
-  font-size: 2rem;
-  font-weight: 500;
+  font-size: 2.5rem;
+  font-weight: 700;
   margin: 0;
   margin-bottom: 1rem;
 }

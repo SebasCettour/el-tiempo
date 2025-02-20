@@ -1,39 +1,69 @@
 .container {
   flex: 1;
   background-color: var(--white);
-  opacity: 0.7;
+  opacity: 0.8;
   color: #000;
   border-radius: 1rem;
   text-align: center;
   padding: 0.3rem;
   width: 60rem;
   box-sizing: border-box;
-  margin-top: 0.5rem;
   height: fit-content;
 }
 
-.current {
-  font-size: 2.5rem;
+.title{
+  color: #535252;
+  background-color: #9a9696;
+  font-size: 3rem;
+  letter-spacing: 0.3rem;
+  border-radius: 1rem;
+}
+
+.title span{
+  color: #000
+}
+
+.image {
+  width: 90px;
+  background-color: #0000004a;
+  height: auto;
+  border: #000 1px solid;
+  border-radius: 10px;
+  box-shadow: 10px 10px 10px #00000033;
+
+}
+
+.description{
+  font-size: 3rem;
   font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5rem;
+  
+}
+
+
+.current {
+  font-size: 4rem;
+  font-weight: 600;
   margin: 0;
 }
 
 .temperatures {
   display: flex;
   justify-content: center;
-  gap: 2rem;
+  gap: 20rem;
 }
 
 .span_max,
 .p_max {
   color: #f10808;
-  font-weight: 600;
-  font-size: 2.5rem;
+  font-weight: 700;
+  font-size: 3rem;
 }
 
 .span_min,
 .p_min {
   color: #0685f3;
-  font-weight: 600;
-  font-size: 2.5rem;
+  font-weight: 700;
+  font-size: 3rem;
 }
