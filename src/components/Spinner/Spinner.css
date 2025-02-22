@@ -1,11 +1,10 @@
+/* Spinner */
 .sk-cube-grid {
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Usamos grid para un mejor control */
-  grid-template-rows: repeat(3, 1fr); /* Asegura que el grid tenga 3 filas */
-  justify-content: center;
-  align-items: center;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
   gap: 4px;
   margin: 100px auto;
 }
@@ -14,21 +13,9 @@
   width: 100%;
   height: 100%;
   background-color: #012130;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   border-radius: 4px;
   animation: sk-cubeGridScaleDelay 1.5s infinite ease-in-out;
 }
-
-/* Animación para los cubos con retrasos escalonados */
-.sk-cube:nth-child(1) { animation-delay: 0.1s; }
-.sk-cube:nth-child(2) { animation-delay: 0.2s; }
-.sk-cube:nth-child(3) { animation-delay: 0.3s; }
-.sk-cube:nth-child(4) { animation-delay: 0.4s; }
-.sk-cube:nth-child(5) { animation-delay: 0.5s; }
-.sk-cube:nth-child(6) { animation-delay: 0.6s; }
-.sk-cube:nth-child(7) { animation-delay: 0.7s; }
-.sk-cube:nth-child(8) { animation-delay: 0.8s; }
-.sk-cube:nth-child(9) { animation-delay: 0.9s; }
 
 @keyframes sk-cubeGridScaleDelay {
   0%, 100% {
@@ -41,18 +28,9 @@
   }
 }
 
-/* Mejorando la accesibilidad para tamaños más pequeños */
-@media (max-width: 768px) {
-  .sk-cube-grid {
-    width: 60px; /* Reducimos el tamaño del spinner */
-    height: 60px;
-    margin: 50px auto;
-  }
-}
-
 @media (max-width: 480px) {
   .sk-cube-grid {
-    width: 50px; /* Ajustamos aún más el tamaño */
+    width: 50px;
     height: 50px;
   }
 }

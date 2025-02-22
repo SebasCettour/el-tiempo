@@ -12,34 +12,9 @@
   height: fit-content;
 }
 
-.st,
-.humidity,
-.pressure,
-.wind,
-.rain,
-.clouds {
-  font-size: 3rem;
-  font-weight: 500;
-  margin: 0;
-  margin-bottom: 1rem;
-}
-
-@media (max-width: 768px) {
-  .container {
-    width: 90%;
-    padding: 1rem;
-  }
-}
-
-.feels_like,
-.humidity,
-.pressure,
-.wind,
-.rain,
-.clouds {
+.feels_like, .humidity, .pressure, .wind, .rain, .clouds {
   font-size: 2.5rem;
   font-weight: 700;
-  margin: 0;
   margin-bottom: 1rem;
 }
 
@@ -49,11 +24,7 @@
     padding: 1rem;
   }
 
-  .st,
-  .humedad,
-  .presion,
-  .wind,
-  .clouds {
+  .st, .humidity, .pressure, .wind, .clouds {
     font-size: 1.6rem;
   }
 }
