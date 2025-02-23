@@ -18,8 +18,11 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
+  background-size: cover; /* Asegura que el fondo cubra todo el área */
+  background-position: center; /* Centra el fondo */
 }
 
+/* Media Query para pantallas medianas */
 @media (max-width: 1200px) {
   html {
     font-size: 56.25%;
@@ -28,14 +31,19 @@ body {
 
 @media (max-width: 768px) {
   html {
-    font-size: 50%;
+    font-size: 50%; /* Ajusta el tamaño base */
   }
 
   body {
-    font-size: 1.6rem;
+    font-size: 1.6rem; /* Asegura una lectura cómoda */
+    background-size: cover; /* Asegura que el fondo se expanda correctamente */
+    background-position: center; 
+  
   }
 }
 
+
+/* Media Query para pantallas aún más pequeñas */
 @media (max-width: 480px) {
   html {
     font-size: 45%;
@@ -43,5 +51,7 @@ body {
 
   body {
     font-size: 1.4rem;
+    background-size: cover; /* Asegura que el fondo se expanda correctamente */
+    background-position: center; /* Mantiene el fondo centrado */
   }
 }

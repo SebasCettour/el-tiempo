@@ -1,4 +1,3 @@
-/* Formulario */
 .form {
   display: flex;
   flex-direction: column;
@@ -8,6 +7,7 @@
   max-width: 800px;
   gap: 2rem;
   padding: 1.5rem;
+  margin: 0 auto;
 }
 
 .field {
@@ -28,10 +28,16 @@
   color: var(--white);
   font-size: 1.8rem;
   font-weight: 400;
-  border-radius: 0.7rem;
+  border-radius: 0.6rem;
   text-align: center;
   box-sizing: border-box;
   appearance: none;
+  transition: border-color 0.3s ease;
+}
+
+.form input[type="text"]:focus,
+.form select:focus {
+  border-color: var(--primary); /* Cambio de color al enfocar */
 }
 
 .submit {
@@ -45,7 +51,8 @@
   text-transform: uppercase;
   cursor: pointer;
   border-radius: 0.7rem;
-  width: 30%;
+  width: 40%;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .submit:hover {
@@ -53,17 +60,29 @@
   color: #000;
 }
 
+.submit:active {
+  transform: scale(0.98); /* Efecto de clic */
+}
+
 @media (max-width: 768px) {
   .form {
     width: 90%;
-    padding: 1rem;
+    padding: 0.5rem;
+    
   }
 
   .submit {
     font-size: 1.2rem;
     padding: 0.6rem;
+    width: 60%;
+  }
+
+  .form input[type="text"],
+  .form select {
+    font-size: 1.6rem; /* Ajusta el tamaño de la fuente para mejor legibilidad */
   }
 }
+
 
 @media (max-width: 480px) {
   .form {
@@ -74,5 +93,12 @@
   .submit {
     font-size: 1.1rem;
     padding: 0.5rem;
+    width: 80%;
+    height: 3rem;
+  }
+
+  .form input[type="text"],
+  .form select {
+    font-size: 1.4rem; /* Ajusta aún más el tamaño de la fuente */
   }
 }
