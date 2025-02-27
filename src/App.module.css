@@ -9,12 +9,10 @@
   .title {
     font-size: 4rem;
     letter-spacing: 1rem;
-    margin-top: .2rem;
+    margin-top: 0.2rem;
     width: 60vw;
-    
   }
 }
-
 
 @media (max-width: 480px) {
   .title {
@@ -24,4 +22,3 @@
     margin-top: -8rem;
   }
 }
-

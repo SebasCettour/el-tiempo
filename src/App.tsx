@@ -16,11 +16,9 @@ function App() {
         <Form fetchWeather={fetchWeather} />
         {loading && <Spinner />}
         {hasWeatherData && (
-          <>
-            <div>
-              <WeatherDetail weather={weather} />
-            </div>
-          </>
+          <div className={styles.weatherContainer}>
+            <WeatherDetail weather={weather} />
+          </div>
         )}
         {notFound && <Alert>Ciudad no encontrada</Alert>}
       </div>

@@ -14,6 +14,7 @@ export default function Form({ fetchWeather }: FormProps) {
     city: "",
   });
   const [alert, setAlert] = useState("");
+
   const handleChange = (
     e: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>
   ) => {
@@ -22,6 +23,7 @@ export default function Form({ fetchWeather }: FormProps) {
       [e.target.name]: e.target.value,
     });
   };
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -31,17 +33,21 @@ export default function Form({ fetchWeather }: FormProps) {
     }
     fetchWeather(search);
   };
+
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <div className={styles.field}>
-        <label htmlFor="country">País:</label>
+        <label htmlFor="country" className={styles.label}>
+          País:
+        </label>
         <select
           id="country"
           value={search.country}
           name="country"
           onChange={handleChange}
+          className={styles.input}
         >
-          <option>Selecione un País</option>
+          <option value="">Seleccione un País</option>
           {countries.map((country) => (
             <option key={country.code} value={country.code}>
               {country.name}
@@ -53,7 +59,9 @@ export default function Form({ fetchWeather }: FormProps) {
       {alert && <Alert>{alert}</Alert>}
 
       <div className={styles.field}>
-        <label htmlFor="city">Ciudad:</label>
+        <label htmlFor="city" className={styles.label}>
+          Ciudad:
+        </label>
         <input
           id="city"
           type="text"
@@ -61,9 +69,13 @@ export default function Form({ fetchWeather }: FormProps) {
           placeholder="Ciudad"
           value={search.city}
           onChange={handleChange}
-        ></input>
+          className={styles.input}
+        />
       </div>
-      <input className={styles.submit} type="submit" value="Consultar" />
+
+      <button type="submit" className={styles.submit}>
+        Consultar
+      </button>
     </form>
   );
 }
