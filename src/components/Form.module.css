@@ -133,8 +133,8 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.2rem;
-  color: #2a2929;
-  background: linear-gradient(135deg, #ffd700, #cfbb016a);
+  color: #000000;
+  background: linear-gradient(135deg, #fcd6018a, #cfbb016a);
   border: none;
   border-radius: 0.8rem;
   cursor: pointer;

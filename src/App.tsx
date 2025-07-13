@@ -197,7 +197,7 @@ function App() {
           <FontAwesomeIcon icon={faCloudSun} className={styles.logo} />
           <h1 className={styles.title}>El Tiempo</h1>
         </div>
-        <p className={styles.subtitle}>Consulta el clima en tiempo real</p>
+        <p className={styles.subtitle}>Consulta el tiempo actual</p>
 
         {/* Header Actions */}
         <div className={styles.headerActions}>

@@ -125,7 +125,7 @@ const Form = forwardRef<HTMLFormElement, FormProps>(({ fetchWeather }, ref) => {
           <FontAwesomeIcon icon={faSearch} className={styles.searchIcon} />
           <h2 className={styles.formTitle}>Consulta el Tiempo</h2>
           <p className={styles.formSubtitle}>
-            Ingresa una ciudad y país para obtener información meteorológica
+            Ingresa un país y una ciudad para obtener información meteorológica
           </p>
         </div>
 
