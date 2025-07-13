@@ -420,7 +420,7 @@ a:hover {
   }
 }
 
-/* ================= Loading States ================= */
+/* ================= Estados de carga ================= */
 .loading {
   opacity: 0.6;
   pointer-events: none;
@@ -449,7 +449,7 @@ a:hover {
   }
 }
 
-/* ================= Accessibility Enhancements ================= */
+/* ================= Mejoras de accesibilidad ================= */
 @media (prefers-reduced-motion: no-preference) {
   .animate-fade-in {
     animation: fadeIn 0.5s ease-out;
