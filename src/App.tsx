@@ -413,7 +413,7 @@ function App() {
 
       <footer className={styles.footer}>
         <p className={styles.footerText}>
-          © {new Date().getFullYear()} El Tiempo - Clima en tiempo real
+          © {new Date().getFullYear()} El Tiempo
         </p>
       </footer>
     </div>
