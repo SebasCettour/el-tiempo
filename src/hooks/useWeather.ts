@@ -95,14 +95,14 @@ export default function useWeather() {
     setNotFound(false);
 
     try {
-      // Get coordinates
+      // Obtener coordenadas
       const geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(
         search.city
       )},${encodeURIComponent(search.country)}&appid=${appId}`;
 
       const { data: geoData } = await axios.get(geoUrl);
 
-      // Check if city exists
+      // Chequear si la ciudad existe
       if (!geoData || geoData.length === 0) {
         setNotFound(true);
         return;
@@ -111,7 +111,7 @@ export default function useWeather() {
       const lat = geoData[0].lat;
       const lon = geoData[0].lon;
 
-      // Get weather data
+      // Obtener info del tiempo
       const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=es&appid=${appId}`;
       const { data: weatherResult } = await axios.get(weatherUrl);
 

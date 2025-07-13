@@ -1,13 +1,12 @@
-/* ================= CSS Variables ================= */
+/* =================Variables ================= */
 :root {
-  /* Colors */
+  /* Colores */
   --white: #ffffff;
   --black: #000000;
   --primary: #f59e0b;
   --primary-dark: #d97706;
   --primary-light: #fbbf24;
 
-  /* Grays */
   --gray-50: #f9fafb;
   --gray-100: #f3f4f6;
   --gray-200: #e5e7eb;
@@ -19,13 +18,11 @@
   --gray-800: #1f2937;
   --gray-900: #111827;
 
-  /* Semantic Colors */
   --success: #10b981;
   --warning: #f59e0b;
   --error: #ef4444;
   --info: #3b82f6;
 
-  /* Gradients */
   --gradient-primary: linear-gradient(
     135deg,
     #667eea 0%,
@@ -35,7 +32,6 @@
   --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
   --gradient-warm: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
 
-  /* Shadows */
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
@@ -45,7 +41,6 @@
     0 10px 10px -5px rgba(0, 0, 0, 0.04);
   --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 
-  /* Spacing */
   --space-xs: 0.25rem;
   --space-sm: 0.5rem;
   --space-md: 1rem;
@@ -54,7 +49,6 @@
   --space-2xl: 3rem;
   --space-3xl: 4rem;
 
-  /* Border Radius */
   --radius-sm: 0.25rem;
   --radius-md: 0.5rem;
   --radius-lg: 0.75rem;
@@ -62,7 +56,6 @@
   --radius-2xl: 1.5rem;
   --radius-full: 9999px;
 
-  /* Typography */
   --font-family-sans: "Smooch Sans", -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-family-mono: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono",
@@ -93,12 +86,10 @@
   --line-height-relaxed: 1.625;
   --line-height-loose: 2;
 
-  /* Transitions */
   --transition-fast: 150ms ease-in-out;
   --transition-normal: 300ms ease-in-out;
   --transition-slow: 500ms ease-in-out;
 
-  /* Z-Index */
   --z-dropdown: 1000;
   --z-sticky: 1020;
   --z-fixed: 1030;
@@ -107,7 +98,6 @@
   --z-popover: 1060;
   --z-tooltip: 1070;
 
-  /* Breakpoints */
   --breakpoint-sm: 640px;
   --breakpoint-md: 768px;
   --breakpoint-lg: 1024px;
@@ -115,7 +105,7 @@
   --breakpoint-2xl: 1536px;
 }
 
-/* ================= Base Styles ================= */
+/* ================= Estilos base ================= */
 *,
 *::before,
 *::after {
@@ -146,7 +136,6 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* ================= Typography ================= */
 h1,
 h2,
 h3,
@@ -192,7 +181,7 @@ a:hover {
   color: var(--primary-light);
 }
 
-/* ================= Focus Styles ================= */
+/* ================= Focus ================= */
 :focus {
   outline: 2px solid var(--primary);
   outline-offset: 2px;
@@ -207,7 +196,7 @@ a:hover {
   outline-offset: 2px;
 }
 
-/* ================= Selection ================= */
+/* ================= Selección ================= */
 ::selection {
   background-color: var(--primary);
   color: var(--white);
@@ -264,7 +253,7 @@ a:hover {
   border: 0 !important;
 }
 
-/* ================= Responsive Typography ================= */
+/* ================= Tipografias en Responsive ================= */
 @media (max-width: 1200px) {
   html {
     font-size: 56.25%; /* 1rem = 9px */
@@ -329,7 +318,7 @@ a:hover {
   }
 }
 
-/* ================= High Contrast Mode ================= */
+/* ================= Modo Alto Contraste ================= */
 @media (prefers-contrast: high) {
   :root {
     --primary: #ff6b35;
@@ -348,7 +337,7 @@ a:hover {
   }
 }
 
-/* ================= Reduced Motion ================= */
+/* ================= Movilidad reducida de las animaciones ================= */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -364,7 +353,7 @@ a:hover {
   }
 }
 
-/* ================= Dark Mode Support ================= */
+/* ================= Compatibilidad con modo oscuro ================= */
 @media (prefers-color-scheme: dark) {
   :root {
     --white: #ffffff;
@@ -372,7 +361,7 @@ a:hover {
   }
 }
 
-/* ================= Print Styles ================= */
+/* ================= Estilos para impresión ================= */
 @media print {
   * {
     background: transparent !important;

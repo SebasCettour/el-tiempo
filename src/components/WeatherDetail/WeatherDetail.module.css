@@ -36,8 +36,13 @@
 }
 
 @keyframes gradientShift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 .cityName {
@@ -58,7 +63,11 @@
   align-items: center;
   gap: 1.5rem;
   padding: 1.5rem;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.05)
+  );
   border-radius: 1rem;
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
@@ -105,7 +114,11 @@
 }
 
 .description {
-  background: linear-gradient(135deg, rgba(192, 190, 190, 0.3), rgba(192, 190, 190, 0.1));
+  background: linear-gradient(
+    135deg,
+    rgba(192, 190, 190, 0.3),
+    rgba(192, 190, 190, 0.1)
+  );
   padding: 0.8rem 1.5rem;
   font-size: 1.8rem;
   font-weight: 600;
@@ -128,7 +141,11 @@
   align-items: center;
   gap: 0.8rem;
   padding: 1rem;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.05)
+  );
   border-radius: 0.8rem;
   border: 1px solid rgba(255, 255, 255, 0.2);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -165,7 +182,11 @@
   gap: 3rem;
   margin-top: 1rem;
   padding: 1.5rem;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.05)
+  );
   border-radius: 1rem;
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
@@ -220,7 +241,6 @@
   margin: 0;
 }
 
-/* Specific item styles */
 .feelsLike .infoIcon {
   color: #e67e22;
 }
@@ -241,7 +261,7 @@
   color: #2980b9;
 }
 
-/* ================= Responsive Design ================= */
+/* ================= Responsive ================= */
 @media (max-width: 768px) {
   .container {
     width: 95%;
@@ -345,7 +365,7 @@
   }
 }
 
-/* ================= Accessibility Improvements ================= */
+/* ================= Mejoras de accesibilidad ================= */
 @media (prefers-reduced-motion: reduce) {
   .weatherIcon,
   .infoItem,
@@ -355,17 +375,17 @@
   }
 }
 
-/* High contrast mode support */
+/* Compatibilidad con el modo de alto contraste */
 @media (prefers-contrast: high) {
   .container {
     border: 2px solid #000;
   }
-  
+
   .title {
     background: #000;
     color: #fff;
   }
-  
+
   .infoItem {
     border: 1px solid #000;
   }

@@ -22,7 +22,7 @@ const Form = forwardRef<HTMLFormElement, FormProps>(({ fetchWeather }, ref) => {
     city: false,
   });
 
-  // Clear alert after 3 seconds
+  // Limpiar alerta a los 3 segundos
   useEffect(() => {
     if (alert) {
       const timer = setTimeout(() => {
@@ -36,25 +36,25 @@ const Form = forwardRef<HTMLFormElement, FormProps>(({ fetchWeather }, ref) => {
     e: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>
   ) => {
     const { name, value } = e.target;
-    setSearch(prev => ({
+    setSearch((prev) => ({
       ...prev,
       [name]: value,
     }));
-    
-    // Mark field as touched
-    setTouched(prev => ({
+
+    // Marcar el campo como tocado
+    setTouched((prev) => ({
       ...prev,
       [name]: true,
     }));
 
-    // Clear alert when user starts typing
+    // Limpiar alerta cuando el usuario comienza a escribir
     if (alert) {
       setAlert("");
     }
   };
 
   const handleBlur = (fieldName: keyof SearchType) => {
-    setTouched(prev => ({
+    setTouched((prev) => ({
       ...prev,
       [fieldName]: true,
     }));
@@ -65,29 +65,29 @@ const Form = forwardRef<HTMLFormElement, FormProps>(({ fetchWeather }, ref) => {
       setAlert("Por favor selecciona un país");
       return false;
     }
-    
+
     if (!search.city.trim()) {
       setAlert("Por favor ingresa una ciudad");
       return false;
     }
-    
+
     if (search.city.trim().length < 2) {
       setAlert("La ciudad debe tener al menos 2 caracteres");
       return false;
     }
-    
+
     return true;
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       return;
     }
 
     setIsSubmitting(true);
-    
+
     try {
       await fetchWeather(search);
     } catch {
@@ -99,13 +99,13 @@ const Form = forwardRef<HTMLFormElement, FormProps>(({ fetchWeather }, ref) => {
 
   const getFieldError = (fieldName: keyof SearchType): string => {
     if (!touched[fieldName]) return "";
-    
+
     const value = search[fieldName];
-    
+
     if (fieldName === "country" && !value.trim()) {
       return "País es requerido";
     }
-    
+
     if (fieldName === "city") {
       if (!value.trim()) {
         return "Ciudad es requerida";
@@ -114,13 +114,18 @@ const Form = forwardRef<HTMLFormElement, FormProps>(({ fetchWeather }, ref) => {
         return "Mínimo 2 caracteres";
       }
     }
-    
+
     return "";
   };
 
   return (
     <div className={styles.formWrapper}>
-      <form ref={ref} className={styles.form} onSubmit={handleSubmit} noValidate>
+      <form
+        ref={ref}
+        className={styles.form}
+        onSubmit={handleSubmit}
+        noValidate
+      >
         <div className={styles.formHeader}>
           <FontAwesomeIcon icon={faSearch} className={styles.searchIcon} />
           <h2 className={styles.formTitle}>Consulta el Tiempo</h2>
@@ -130,7 +135,7 @@ const Form = forwardRef<HTMLFormElement, FormProps>(({ fetchWeather }, ref) => {
         </div>
 
         <div className={styles.fieldsContainer}>
-          {/* País Field */}
+          {/* País */}
           <div className={styles.field}>
             <label htmlFor="country" className={styles.label}>
               <FontAwesomeIcon icon={faGlobe} className={styles.fieldIcon} />
@@ -143,9 +148,13 @@ const Form = forwardRef<HTMLFormElement, FormProps>(({ fetchWeather }, ref) => {
                 name="country"
                 onChange={handleChange}
                 onBlur={() => handleBlur("country")}
-                className={`${styles.select} ${getFieldError("country") ? styles.error : ""}`}
+                className={`${styles.select} ${
+                  getFieldError("country") ? styles.error : ""
+                }`}
                 disabled={isSubmitting}
-                aria-describedby={getFieldError("country") ? "country-error" : undefined}
+                aria-describedby={
+                  getFieldError("country") ? "country-error" : undefined
+                }
               >
                 <option value="">Selecciona un País</option>
                 {countries.map((country) => (
@@ -162,7 +171,7 @@ const Form = forwardRef<HTMLFormElement, FormProps>(({ fetchWeather }, ref) => {
             </div>
           </div>
 
-          {/* Ciudad Field */}
+          {/* Ciudad */}
           <div className={styles.field}>
             <label htmlFor="city" className={styles.label}>
               <FontAwesomeIcon icon={faCity} className={styles.fieldIcon} />
@@ -177,9 +186,13 @@ const Form = forwardRef<HTMLFormElement, FormProps>(({ fetchWeather }, ref) => {
                 value={search.city}
                 onChange={handleChange}
                 onBlur={() => handleBlur("city")}
-                className={`${styles.input} ${getFieldError("city") ? styles.error : ""}`}
+                className={`${styles.input} ${
+                  getFieldError("city") ? styles.error : ""
+                }`}
                 disabled={isSubmitting}
-                aria-describedby={getFieldError("city") ? "city-error" : undefined}
+                aria-describedby={
+                  getFieldError("city") ? "city-error" : undefined
+                }
                 autoComplete="off"
               />
               {getFieldError("city") && (
@@ -197,9 +210,11 @@ const Form = forwardRef<HTMLFormElement, FormProps>(({ fetchWeather }, ref) => {
           </div>
         )}
 
-        <button 
-          type="submit" 
-          className={`${styles.submit} ${isSubmitting ? styles.submitting : ""}`}
+        <button
+          type="submit"
+          className={`${styles.submit} ${
+            isSubmitting ? styles.submitting : ""
+          }`}
           disabled={isSubmitting}
           aria-label={isSubmitting ? "Consultando..." : "Consultar"}
         >

@@ -187,7 +187,7 @@
   margin: 1rem 0;
 }
 
-/* Responsive Design */
+/* Responsive */
 @media (max-width: 768px) {
   .form {
     padding: 2rem;
