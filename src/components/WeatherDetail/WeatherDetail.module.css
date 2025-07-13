@@ -73,7 +73,7 @@
 .weatherIcon {
   width: 100px;
   height: auto;
-  background: linear-gradient(135deg, #f0f8ff, #e6f3ff);
+  background: linear-gradient(135deg, #969797, #e6f3ff);
   border: 2px solid #7ab3d7;
   border-radius: 15px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);

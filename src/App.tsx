@@ -195,7 +195,7 @@ function App() {
       <header className={styles.header}>
         <div className={styles.logoContainer}>
           <FontAwesomeIcon icon={faCloudSun} className={styles.logo} />
-          <h1 className={styles.title}>El Tiempo</h1>
+          <h1 className={styles.title}>Tiempo Real</h1>
         </div>
         <p className={styles.subtitle}>Consulta el tiempo actual</p>
 
@@ -413,7 +413,7 @@ function App() {
 
       <footer className={styles.footer}>
         <p className={styles.footerText}>
-          © {new Date().getFullYear()} El Tiempo
+          © {new Date().getFullYear()} Tiempo Real
         </p>
       </footer>
     </div>
