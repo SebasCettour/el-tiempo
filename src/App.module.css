@@ -23,7 +23,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('/public/bg_clima.jpg') center/cover;
+  background: url('/public/forest.jpg') center/cover;
   opacity: 0.08;
   z-index: -1;
   animation: backgroundFloat 20s ease-in-out infinite;
