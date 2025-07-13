@@ -96,8 +96,10 @@ export default function useWeather() {
 
     try {
       // Get coordinates
-      const geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(search.city)},${encodeURIComponent(search.country)}&appid=${appId}`;
-      
+      const geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(
+        search.city
+      )},${encodeURIComponent(search.country)}&appid=${appId}`;
+
       const { data: geoData } = await axios.get(geoUrl);
 
       // Check if city exists
@@ -114,7 +116,7 @@ export default function useWeather() {
       const { data: weatherResult } = await axios.get(weatherUrl);
 
       const result = WeatherSchema.safeParse(weatherResult);
-      
+
       if (result.success) {
         setWeather(result.data);
       } else {
@@ -123,7 +125,7 @@ export default function useWeather() {
       }
     } catch (error) {
       console.error("Weather fetch error:", error);
-      
+
       if (axios.isAxiosError(error)) {
         const status = error.response?.status;
         if (status === 401) {
@@ -136,7 +138,7 @@ export default function useWeather() {
           setError("Error de conexión. Verifica tu internet");
         }
       } else {
-        setError("Error inesperado al consultar el clima");
+        setError("Error inesperado");
       }
     } finally {
       setLoading(false);
@@ -144,7 +146,9 @@ export default function useWeather() {
   }, []);
 
   const hasWeatherData = useMemo(() => {
-    return weather.name && weather.weather.length > 0 && weather.weather[0].id !== 0;
+    return (
+      weather.name && weather.weather.length > 0 && weather.weather[0].id !== 0
+    );
   }, [weather]);
 
   const resetState = useCallback(() => {

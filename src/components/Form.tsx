@@ -91,7 +91,7 @@ const Form = forwardRef<HTMLFormElement, FormProps>(({ fetchWeather }, ref) => {
     try {
       await fetchWeather(search);
     } catch {
-      setAlert("Error al consultar el clima. Intenta nuevamente.");
+      setAlert("Error al consultar. Intenta nuevamente.");
     } finally {
       setIsSubmitting(false);
     }
@@ -123,7 +123,7 @@ const Form = forwardRef<HTMLFormElement, FormProps>(({ fetchWeather }, ref) => {
       <form ref={ref} className={styles.form} onSubmit={handleSubmit} noValidate>
         <div className={styles.formHeader}>
           <FontAwesomeIcon icon={faSearch} className={styles.searchIcon} />
-          <h2 className={styles.formTitle}>Consulta el Clima</h2>
+          <h2 className={styles.formTitle}>Consulta el Tiempo</h2>
           <p className={styles.formSubtitle}>
             Ingresa una ciudad y país para obtener información meteorológica
           </p>
@@ -201,7 +201,7 @@ const Form = forwardRef<HTMLFormElement, FormProps>(({ fetchWeather }, ref) => {
           type="submit" 
           className={`${styles.submit} ${isSubmitting ? styles.submitting : ""}`}
           disabled={isSubmitting}
-          aria-label={isSubmitting ? "Consultando clima..." : "Consultar clima"}
+          aria-label={isSubmitting ? "Consultando..." : "Consultar"}
         >
           {isSubmitting ? (
             <>
@@ -211,7 +211,7 @@ const Form = forwardRef<HTMLFormElement, FormProps>(({ fetchWeather }, ref) => {
           ) : (
             <>
               <FontAwesomeIcon icon={faSearch} className={styles.submitIcon} />
-              Consultar Clima
+              Consultar
             </>
           )}
         </button>

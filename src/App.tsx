@@ -400,7 +400,7 @@ function App() {
               <div className={styles.helpSection}>
                 <h4>Funcionalidades</h4>
                 <ul className={styles.featuresList}>
-                  <li>Consulta el clima en tiempo real</li>
+                  <li>Consulta el tiempo</li>
                   <li>Historial de búsquedas recientes</li>
                   <li>Información detallada del clima</li>
                   <li>Diseño responsivo para todos los dispositivos</li>
