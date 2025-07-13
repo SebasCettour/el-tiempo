@@ -1,81 +1,225 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState, useEffect, forwardRef } from "react";
 import type { SearchType } from "../types";
 import { countries } from "../data/countries";
 import styles from "../components/Form.module.css";
 import Alert from "../Alert/Alert";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch, faGlobe, faCity } from "@fortawesome/free-solid-svg-icons";
 
-type FormProps = {
+interface FormProps {
   fetchWeather: (search: SearchType) => Promise<void>;
-};
+}
 
-export default function Form({ fetchWeather }: FormProps) {
+const Form = forwardRef<HTMLFormElement, FormProps>(({ fetchWeather }, ref) => {
   const [search, setSearch] = useState<SearchType>({
     country: "",
     city: "",
   });
   const [alert, setAlert] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [touched, setTouched] = useState({
+    country: false,
+    city: false,
+  });
+
+  // Clear alert after 3 seconds
+  useEffect(() => {
+    if (alert) {
+      const timer = setTimeout(() => {
+        setAlert("");
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [alert]);
 
   const handleChange = (
     e: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>
   ) => {
-    setSearch({
-      ...search,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    setSearch(prev => ({
+      ...prev,
+      [name]: value,
+    }));
+    
+    // Mark field as touched
+    setTouched(prev => ({
+      ...prev,
+      [name]: true,
+    }));
+
+    // Clear alert when user starts typing
+    if (alert) {
+      setAlert("");
+    }
   };
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleBlur = (fieldName: keyof SearchType) => {
+    setTouched(prev => ({
+      ...prev,
+      [fieldName]: true,
+    }));
+  };
 
-    if (Object.values(search).includes("")) {
-      setAlert("Todos los campos son obligatorios");
+  const validateForm = (): boolean => {
+    if (!search.country.trim()) {
+      setAlert("Por favor selecciona un país");
+      return false;
+    }
+    
+    if (!search.city.trim()) {
+      setAlert("Por favor ingresa una ciudad");
+      return false;
+    }
+    
+    if (search.city.trim().length < 2) {
+      setAlert("La ciudad debe tener al menos 2 caracteres");
+      return false;
+    }
+    
+    return true;
+  };
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    
+    if (!validateForm()) {
       return;
     }
-    fetchWeather(search);
+
+    setIsSubmitting(true);
+    
+    try {
+      await fetchWeather(search);
+    } catch {
+      setAlert("Error al consultar el clima. Intenta nuevamente.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const getFieldError = (fieldName: keyof SearchType): string => {
+    if (!touched[fieldName]) return "";
+    
+    const value = search[fieldName];
+    
+    if (fieldName === "country" && !value.trim()) {
+      return "País es requerido";
+    }
+    
+    if (fieldName === "city") {
+      if (!value.trim()) {
+        return "Ciudad es requerida";
+      }
+      if (value.trim().length < 2) {
+        return "Mínimo 2 caracteres";
+      }
+    }
+    
+    return "";
   };
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
-      <div className={styles.field}>
-        <label htmlFor="country" className={styles.label}>
-          País:
-        </label>
-        <select
-          id="country"
-          value={search.country}
-          name="country"
-          onChange={handleChange}
-          className={styles.input}
+    <div className={styles.formWrapper}>
+      <form ref={ref} className={styles.form} onSubmit={handleSubmit} noValidate>
+        <div className={styles.formHeader}>
+          <FontAwesomeIcon icon={faSearch} className={styles.searchIcon} />
+          <h2 className={styles.formTitle}>Consulta el Clima</h2>
+          <p className={styles.formSubtitle}>
+            Ingresa una ciudad y país para obtener información meteorológica
+          </p>
+        </div>
+
+        <div className={styles.fieldsContainer}>
+          {/* País Field */}
+          <div className={styles.field}>
+            <label htmlFor="country" className={styles.label}>
+              <FontAwesomeIcon icon={faGlobe} className={styles.fieldIcon} />
+              País:
+            </label>
+            <div className={styles.inputWrapper}>
+              <select
+                id="country"
+                value={search.country}
+                name="country"
+                onChange={handleChange}
+                onBlur={() => handleBlur("country")}
+                className={`${styles.select} ${getFieldError("country") ? styles.error : ""}`}
+                disabled={isSubmitting}
+                aria-describedby={getFieldError("country") ? "country-error" : undefined}
+              >
+                <option value="">Selecciona un País</option>
+                {countries.map((country) => (
+                  <option key={country.code} value={country.code}>
+                    {country.name}
+                  </option>
+                ))}
+              </select>
+              {getFieldError("country") && (
+                <span id="country-error" className={styles.errorMessage}>
+                  {getFieldError("country")}
+                </span>
+              )}
+            </div>
+          </div>
+
+          {/* Ciudad Field */}
+          <div className={styles.field}>
+            <label htmlFor="city" className={styles.label}>
+              <FontAwesomeIcon icon={faCity} className={styles.fieldIcon} />
+              Ciudad:
+            </label>
+            <div className={styles.inputWrapper}>
+              <input
+                id="city"
+                type="text"
+                name="city"
+                placeholder="Ej: Madrid, Barcelona, Valencia..."
+                value={search.city}
+                onChange={handleChange}
+                onBlur={() => handleBlur("city")}
+                className={`${styles.input} ${getFieldError("city") ? styles.error : ""}`}
+                disabled={isSubmitting}
+                aria-describedby={getFieldError("city") ? "city-error" : undefined}
+                autoComplete="off"
+              />
+              {getFieldError("city") && (
+                <span id="city-error" className={styles.errorMessage}>
+                  {getFieldError("city")}
+                </span>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {alert && (
+          <div className={styles.alertContainer}>
+            <Alert>{alert}</Alert>
+          </div>
+        )}
+
+        <button 
+          type="submit" 
+          className={`${styles.submit} ${isSubmitting ? styles.submitting : ""}`}
+          disabled={isSubmitting}
+          aria-label={isSubmitting ? "Consultando clima..." : "Consultar clima"}
         >
-          <option value="">Seleccione un País</option>
-          {countries.map((country) => (
-            <option key={country.code} value={country.code}>
-              {country.name}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      {alert && <Alert>{alert}</Alert>}
-
-      <div className={styles.field}>
-        <label htmlFor="city" className={styles.label}>
-          Ciudad:
-        </label>
-        <input
-          id="city"
-          type="text"
-          name="city"
-          placeholder="Ciudad"
-          value={search.city}
-          onChange={handleChange}
-          className={styles.input}
-        />
-      </div>
-
-      <button type="submit" className={styles.submit}>
-        Consultar
-      </button>
-    </form>
+          {isSubmitting ? (
+            <>
+              <div className={styles.spinner}></div>
+              Consultando...
+            </>
+          ) : (
+            <>
+              <FontAwesomeIcon icon={faSearch} className={styles.submitIcon} />
+              Consultar Clima
+            </>
+          )}
+        </button>
+      </form>
+    </div>
   );
-}
+});
+
+Form.displayName = "Form";
+
+export default Form;

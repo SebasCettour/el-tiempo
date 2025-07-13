@@ -1,7 +1,7 @@
 import axios from "axios";
 import { z } from "zod";
 import { SearchType } from "../types";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useCallback } from "react";
 
 //Zod
 const WeatherSchema = z.object({
@@ -39,6 +39,7 @@ const WeatherSchema = z.object({
 });
 
 export type WeatherSchema = z.infer<typeof WeatherSchema>;
+
 const initialState = {
   name: "",
   main: {
@@ -73,46 +74,94 @@ export default function useWeather() {
   const [weather, setWeather] = useState<WeatherSchema>(initialState);
   const [loading, setLoading] = useState(false);
   const [notFound, setNotFound] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const fetchWeather = async (search: SearchType) => {
+  const clearError = useCallback(() => {
+    setError(null);
+    setNotFound(false);
+  }, []);
+
+  const fetchWeather = useCallback(async (search: SearchType) => {
     const appId = import.meta.env.VITE_API_KEY;
+
+    if (!appId) {
+      setError("API key no configurada");
+      return;
+    }
 
     setLoading(true);
     setWeather(initialState);
+    setError(null);
+    setNotFound(false);
 
     try {
-      const geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${search.city},${search.country}&appid=${appId}`;
+      // Get coordinates
+      const geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(search.city)},${encodeURIComponent(search.country)}&appid=${appId}`;
+      
+      const { data: geoData } = await axios.get(geoUrl);
 
-
-      const { data } = await axios(geoUrl);
-
-      //Comprobar si la ciudad existe
-      if (!data[0]) {
+      // Check if city exists
+      if (!geoData || geoData.length === 0) {
         setNotFound(true);
         return;
       }
-      const lat = data[0].lat;
-      const lon = data[0].lon;
+
+      const lat = geoData[0].lat;
+      const lon = geoData[0].lon;
+
+      // Get weather data
       const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=es&appid=${appId}`;
-      const { data: weatherResult } = await axios(weatherUrl);
+      const { data: weatherResult } = await axios.get(weatherUrl);
+
       const result = WeatherSchema.safeParse(weatherResult);
+      
       if (result.success) {
         setWeather(result.data);
+      } else {
+        setError("Error al procesar los datos del clima");
+        console.error("Weather data validation error:", result.error);
       }
     } catch (error) {
-      console.log(error);
+      console.error("Weather fetch error:", error);
+      
+      if (axios.isAxiosError(error)) {
+        const status = error.response?.status;
+        if (status === 401) {
+          setError("Error de autenticación con la API");
+        } else if (status === 404) {
+          setNotFound(true);
+        } else if (status && status >= 500) {
+          setError("Error del servidor. Intenta más tarde");
+        } else {
+          setError("Error de conexión. Verifica tu internet");
+        }
+      } else {
+        setError("Error inesperado al consultar el clima");
+      }
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
-  const hasWeatherData = useMemo(() => weather.name, [weather]);
+  const hasWeatherData = useMemo(() => {
+    return weather.name && weather.weather.length > 0 && weather.weather[0].id !== 0;
+  }, [weather]);
+
+  const resetState = useCallback(() => {
+    setWeather(initialState);
+    setLoading(false);
+    setNotFound(false);
+    setError(null);
+  }, []);
 
   return {
     weather,
     loading,
     notFound,
+    error,
     fetchWeather,
     hasWeatherData,
+    clearError,
+    resetState,
   };
 }
