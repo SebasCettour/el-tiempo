@@ -15,6 +15,7 @@ const WeatherSchema = z.object({
   ),
 
   name: z.string(),
+  timezone: z.number(),
   main: z.object({
     temp: z.number(),
     temp_max: z.number(),
@@ -42,6 +43,7 @@ export type WeatherSchema = z.infer<typeof WeatherSchema>;
 
 const initialState = {
   name: "",
+  timezone: 0,
   main: {
     temp: 0,
     temp_max: 0,

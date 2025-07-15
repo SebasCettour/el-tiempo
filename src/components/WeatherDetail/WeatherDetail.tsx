@@ -67,6 +67,17 @@ const WeatherDetail = memo<WeatherDetailProps>(
       );
     }
 
+    const getLocalTime = (timezoneOffset: number): string => {
+      const nowUTC = new Date(
+        new Date().getTime() + new Date().getTimezoneOffset() * 60000
+      );
+      const localTime = new Date(nowUTC.getTime() + timezoneOffset * 1000);
+      return localTime.toLocaleTimeString("es-AR", {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+    };
+
     return (
       <div
         className={`${styles.container} ${className}`}
@@ -77,6 +88,9 @@ const WeatherDetail = memo<WeatherDetailProps>(
           <h2 className={styles.title}>
             El tiempo en <span className={styles.cityName}>{weather.name}</span>
           </h2>
+          <p className={styles.localTime}>
+            Hora: {getLocalTime(weather.timezone)}
+          </p>
         </header>
 
         <main className={styles.mainContent}>
