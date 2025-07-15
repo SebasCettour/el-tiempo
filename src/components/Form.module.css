@@ -73,7 +73,7 @@
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  font-size: 1rem;
+  font-size: 1.9rem;
   font-weight: 600;
   color: #fff;
 }
@@ -87,7 +87,7 @@
 .select {
   width: 100%;
   padding: 1rem;
-  font-size: 1rem;
+  font-size: 1.5rem;
   border: 2px solid rgba(255, 255, 255, 0.3);
   border-radius: 0.8rem;
   background: rgba(255, 255, 255, 0.1);
@@ -97,6 +97,7 @@
 
 .input::placeholder {
   color: rgba(255, 255, 255, 0.6);
+  font-size: 1.5rem;
 }
 
 .input:focus,
@@ -245,157 +246,148 @@
 /* Responsive */
 @media (max-width: 480px) {
   .formWrapper {
-    padding: 2rem 1rem; /* Increased vertical padding for more height */
+    padding: 2rem 1rem;
     margin-top: 2rem;
   }
 
   .form {
     max-width: 100%;
-    padding: 2rem 1.5rem;
-    gap: 1.5rem;
-    min-height: 300px;
-
-    .fieldsContainer {
-      gap: 2rem;
-    }
-
-    .formTitle {
-      font-size: 1.8rem;
-    }
-
-    .formSubtitle {
-      font-size: 1.1rem;
-    }
-
-    .label {
-      font-size: 1.5rem;
-    }
-
-    .input,
-    .select {
-      font-size: 1.1rem;
-      padding: 1.2rem; /* Slightly increased padding for better input height */
-      height: 48px; /* Explicit height for inputs to enhance visibility */
-    }
-
-    .submit {
-      font-size: 1.4rem;
-      margin-top: 6rem;
-      padding: 1.2rem;
-      height: 30px;
-    }
-
-    .fieldIcon,
-    .submitIcon {
-      font-size: 1.4rem;
-    }
-
-    .searchIcon {
-      font-size: 2.2rem;
-    }
-
-    .errorMessage {
-      font-size: 0.95rem;
-    }
+    padding: 2.5rem 2rem;
+    gap: 2rem;
+    min-height: 350px;
   }
 
-  @media (max-width: 360px) {
-    .formWrapper {
-      padding: 1.5rem 0.8rem; /* Slightly increased vertical padding */
-    }
-
-    .form {
-      padding: 1.8rem 1.2rem; /* Adjusted padding for smaller screens */
-      gap: 1.2rem; /* Slightly increased gap */
-      min-height: 360px; /* Slightly smaller min-height for very small screens */
-    }
-
-    .fieldsContainer {
-      gap: 1.8rem; /* Adjusted gap for smaller screens */
-    }
-
-    .formTitle {
-      font-size: 1.6rem;
-    }
-
-    .formSubtitle {
-      font-size: 1rem;
-    }
-
-    .label {
-      font-size: 1rem;
-    }
-
-    .input,
-    .select {
-      font-size: 1rem;
-      padding: 1rem; /* Adjusted padding */
-      height: 44px; /* Slightly smaller input height for very small screens */
-    }
-
-    .submit {
-      font-size: 1rem;
-      padding: 1rem;
-      height: 46px;
-    }
-
-    .fieldIcon,
-    .submitIcon {
-      font-size: 1.3rem;
-    }
-
-    .searchIcon {
-      font-size: 2rem;
-    }
-
-    .errorMessage {
-      font-size: 0.9rem;
-    }
+  .formTitle {
+    font-size: 2.2rem;
   }
 
-  /* Keep existing accessibility styles unchanged */
-  @media (prefers-reduced-motion: reduce) {
-    .form,
-    .submit,
-    .spinner {
-      transition: none;
-      animation: none;
-    }
+  .formSubtitle {
+    font-size: 1.4rem;
   }
 
-  @media (prefers-contrast: high) {
-    .form {
-      border: 2px solid #fff;
-    }
-
-    .input,
-    .select {
-      border: 2px solid #fff;
-      background: #000;
-      color: #fff;
-    }
-
-    .submit {
-      background: #fff;
-      color: #000;
-    }
+  .label {
+    font-size: 1.6rem;
   }
 
-  .input:focus-visible,
-  .select:focus-visible,
-  .submit:focus-visible {
-    outline: 3px solid #ffd700;
-    outline-offset: 2px;
+  .input,
+  .select {
+    font-size: 1.4rem;
+    padding: 1.4rem;
+    height: 54px;
   }
 
-  select {
-    background-color: rgba(0, 0, 0, 0.6);
+  .submit {
+    font-size: 1.6rem;
+    padding: 1.4rem;
+    height: 35px;
+    margin-top: 4rem;
+  }
+
+  .fieldIcon,
+  .submitIcon {
+    font-size: 1.5rem;
+  }
+
+  .searchIcon {
+    font-size: 2.8rem;
+  }
+
+  .errorMessage {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .formWrapper {
+    padding: 2rem 1rem;
+  }
+
+  .form {
+    padding: 2.2rem 1.6rem;
+    gap: 1.6rem;
+    min-height: 380px;
+  }
+
+  .formTitle {
+    font-size: 2rem;
+  }
+
+  .formSubtitle {
+    font-size: 1.3rem;
+  }
+
+  .label {
+    font-size: 1.4rem;
+  }
+
+  .input,
+  .select {
+    font-size: 1.3rem;
+    padding: 1.2rem;
+    height: 50px;
+  }
+
+  .submit {
+    font-size: 1.5rem;
+    padding: 1.3rem;
+    height: 30x;
+  }
+
+  .fieldIcon,
+  .submitIcon {
+    font-size: 1.4rem;
+  }
+
+  .searchIcon {
+    font-size: 2.6rem;
+  }
+
+  .errorMessage {
+    font-size: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .form,
+  .submit,
+  .spinner {
+    transition: none;
+    animation: none;
+  }
+}
+
+@media (prefers-contrast: high) {
+  .form {
+    border: 2px solid #fff;
+  }
+
+  .input,
+  .select {
+    border: 2px solid #fff;
+    background: #000;
     color: #fff;
   }
 
-  select option {
-    background-color: rgba(30, 30, 30, 0.95);
-    color: #fff;
-    padding: 1rem;
+  .submit {
+    background: #fff;
+    color: #000;
   }
+}
+
+.input:focus-visible,
+.select:focus-visible,
+.submit:focus-visible {
+  outline: 3px solid #ffd700;
+  outline-offset: 2px;
+}
+
+select {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+}
+
+select option {
+  background-color: rgba(30, 30, 30, 0.95);
+  color: #fff;
+  padding: 1rem;
 }

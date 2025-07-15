@@ -65,13 +65,9 @@
 .header {
   text-align: center;
   padding: 2.5rem 1rem;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.1),
-    rgba(255, 255, 255, 0.256)
-  );
+  background: linear-gradient(135deg, #4e4c4cb4, #acaaaa0c);
   backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgb(2, 2, 2);
+  border-bottom: 3px solid #706f6f;
   position: relative;
 }
 
