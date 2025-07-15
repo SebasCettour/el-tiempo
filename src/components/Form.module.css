@@ -244,55 +244,48 @@
 }
 
 /* Responsive */
-@media (max-width: 480px) {
+@media screen and (max-width: 480px) {
   .formWrapper {
-    padding: 2rem 1rem;
-    margin-top: 2rem;
+    padding: 1rem;
   }
 
   .form {
-    max-width: 100%;
-    padding: 2.5rem 2rem;
-    gap: 2rem;
-    min-height: 350px;
+    padding: 1rem;
+    gap: 1rem;
   }
 
   .formTitle {
-    font-size: 2.2rem;
-  }
-
-  .formSubtitle {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
   }
 
   .label {
-    font-size: 1.6rem;
+    font-size: 1.2rem;
   }
 
   .input,
   .select {
-    font-size: 1.4rem;
-    padding: 1.4rem;
-    height: 54px;
+    font-size: 1rem;
+    padding: 0.8rem;
   }
 
-  .submit {
-    font-size: 1.6rem;
-    padding: 1.4rem;
-    height: 35px;
-    margin-top: 4rem;
-  }
-
-  .fieldIcon,
-  .submitIcon {
-    font-size: 1.5rem;
-  }
-
-  .searchIcon {
-    font-size: 2.8rem;
+  .input::placeholder {
+    font-size: 1rem;
   }
 
   .errorMessage {
+    font-size: 0.75rem;
+  }
+
+  .submit {
+    font-size: 0.9rem;
+    padding: 0.8rem;
+  }
+
+  .searchIcon {
+    font-size: 1.5rem;
+  }
+
+  .fieldIcon {
     font-size: 1.1rem;
   }
 }
