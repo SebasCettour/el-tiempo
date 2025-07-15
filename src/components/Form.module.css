@@ -4,13 +4,13 @@
 }
 
 .formWrapper {
-  max-width: 100%;
   width: 100%;
   padding: 2rem;
 }
 
 .form {
-  max-width: 600px;
+  max-width: 800px;
+  height: 350px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -67,7 +67,7 @@
 .field {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 1rem;
 }
 
 .label {
@@ -135,8 +135,8 @@
 
 /* Botón */
 .submit {
-  padding: 1rem;
-  font-size: 1rem;
+  padding: 1.5rem;
+  font-size: 1.5rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1rem;
