@@ -244,99 +244,38 @@
 }
 
 /* Responsive */
-@media screen and (max-width: 480px) {
-  .formWrapper {
-    padding: 1rem;
+@media (max-width: 480px) {
+  .title {
+    font-size: 2rem; /* antes 1.6rem */
   }
 
-  .form {
-    padding: 1rem;
-    gap: 1rem;
+  .currentTemp {
+    font-size: 2.8rem; /* antes 2.2rem */
   }
 
-  .formTitle {
-    font-size: 1.3rem;
+  .description {
+    font-size: 1.4rem; /* antes 1.1rem */
   }
 
-  .label {
-    font-size: 1.2rem;
+  .tempItem {
+    font-size: 1.5rem; /* antes 1.2rem */
   }
 
-  .input,
-  .select {
-    font-size: 1rem;
-    padding: 0.8rem;
+  .infoLabel,
+  .infoValue {
+    font-size: 1.4rem; /* antes 1.1rem */
   }
 
-  .input::placeholder {
-    font-size: 1rem;
+  .noData p {
+    font-size: 1.4rem; /* antes 1.2rem */
   }
 
-  .errorMessage {
-    font-size: 0.75rem;
+  .weatherIcon {
+    width: 80px; /* antes 60px */
   }
 
-  .submit {
-    font-size: 0.9rem;
-    padding: 0.8rem;
-  }
-
-  .searchIcon {
-    font-size: 1.5rem;
-  }
-
-  .fieldIcon {
-    font-size: 1.1rem;
-  }
-}
-
-@media (max-width: 360px) {
-  .formWrapper {
-    padding: 2rem 1rem;
-  }
-
-  .form {
-    padding: 2.2rem 1.6rem;
-    gap: 1.6rem;
-    min-height: 380px;
-  }
-
-  .formTitle {
-    font-size: 2rem;
-  }
-
-  .formSubtitle {
-    font-size: 1.3rem;
-  }
-
-  .label {
-    font-size: 1.4rem;
-  }
-
-  .input,
-  .select {
-    font-size: 1.3rem;
-    padding: 1.2rem;
-    height: 50px;
-  }
-
-  .submit {
-    font-size: 1.5rem;
-    padding: 1.3rem;
-    height: 30x;
-  }
-
-  .fieldIcon,
-  .submitIcon {
-    font-size: 1.4rem;
-  }
-
-  .searchIcon {
-    font-size: 2.6rem;
-  }
-
-  .errorMessage {
-    font-size: 1rem;
+  .noDataIcon {
+    font-size: 2.5rem; /* antes 2rem */
   }
 }
 

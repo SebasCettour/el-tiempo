@@ -2,14 +2,29 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Viewport para buen comportamiento móvil -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
 
     <!-- SEO básico -->
-    <meta name="description" content="Consulta el clima actual en tu ciudad con estilo moderno y responsivo." />
-    <meta name="keywords" content="clima, tiempo, weather app, React, Vite" />
+    <meta
+      name="description"
+      content="Consulta el clima actual en tu ciudad con estilo moderno, accesible y responsive."
+    />
+    <meta
+      name="keywords"
+      content="clima, tiempo, app del clima, tiempo real, pronóstico, React, Vite"
+    />
     <meta name="author" content="Sebastián Cettour" />
 
-    <!-- Tipografías -->
+    <!-- Icono -->
+    <link rel="icon" href="/public/nube_sol.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/public/nube_sol.ico" />
+
+    <!-- Tipografía moderna (Outfit) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -17,18 +32,40 @@
       rel="stylesheet"
     />
 
-    <link rel="icon" href="/public/nube_sol.ico" type="image/x-icon" />
-
     <!-- Título -->
-    <title>Tiempo Real</title>
+    <title>Tiempo Real - App del Clima</title>
 
-    <!-- Estilos (CSS externo o importado en React) -->
+    <!-- Estilos globales sugeridos (si usás CSS externo o Tailwind) -->
+    <style>
+      html {
+        font-size: 16px;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Outfit", sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        background-color: #ffffff;
+        color: #1a1a1a;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      #root {
+        min-height: 100dvh;
+        display: flex;
+        flex-direction: column;
+      }
+    </style>
   </head>
 
   <body>
-    <main id="root" role="main"></main>
+    <!-- Punto de entrada de la app React -->
+    <main id="root" role="main" aria-label="Contenido principal"></main>
 
-    <!-- Script React/Vite -->
+    <!-- Script principal React/Vite -->
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
