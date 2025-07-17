@@ -137,11 +137,11 @@
 .submit {
   padding: 1rem;
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 0.1rem;
   color: #000000;
-  background: linear-gradient(135deg, #fcd6018a, #cfbb016a);
+  background: linear-gradient(135deg, #fcd601b0, #cfba01b9);
   border: none;
   border-radius: 0.8rem;
   cursor: pointer;
@@ -246,36 +246,36 @@
 /* Responsive */
 @media (max-width: 480px) {
   .title {
-    font-size: 2rem; /* antes 1.6rem */
+    font-size: 2rem;
   }
 
   .currentTemp {
-    font-size: 2.8rem; /* antes 2.2rem */
+    font-size: 2.8rem;
   }
 
   .description {
-    font-size: 1.4rem; /* antes 1.1rem */
+    font-size: 1.4rem;
   }
 
   .tempItem {
-    font-size: 1.5rem; /* antes 1.2rem */
+    font-size: 1.5rem;
   }
 
   .infoLabel,
   .infoValue {
-    font-size: 1.4rem; /* antes 1.1rem */
+    font-size: 1.4rem;
   }
 
   .noData p {
-    font-size: 1.4rem; /* antes 1.2rem */
+    font-size: 1.4rem;
   }
 
   .weatherIcon {
-    width: 80px; /* antes 60px */
+    width: 80px;
   }
 
   .noDataIcon {
-    font-size: 2.5rem; /* antes 2rem */
+    font-size: 2.5rem;
   }
 }
 
