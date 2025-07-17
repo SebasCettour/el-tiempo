@@ -1178,7 +1178,7 @@ kbd {
 
 @media (prefers-color-scheme: dark) {
   .app {
-    background: url("/nubes.jpg") center/cover no-repeat fixed;
+    background: url("/fondo.jpg") center/cover no-repeat fixed;
   }
 }
 
