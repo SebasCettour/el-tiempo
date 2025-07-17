@@ -7,8 +7,8 @@
   text-align: center;
   padding: 1.5rem;
   box-sizing: border-box;
-  max-width: 850px; /* Limita el ancho máximo */
-  width: 95%; /* Ocupa hasta el 95% en pantallas grandes */
+  max-width: 850px;
+  width: 95%;
   margin: 1rem auto;
   line-height: 1.5;
   overflow: hidden;
