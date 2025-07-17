@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState, useEffect, forwardRef } from "react";
+import { ChangeEvent, FormEvent, useState, useEffect, forwardRef, useMemo } from "react";
 import type { SearchType } from "../types";
 import { countries } from "../data/countries";
 import styles from "../components/Form.module.css";
@@ -9,6 +9,18 @@ import { faSearch, faGlobe, faCity } from "@fortawesome/free-solid-svg-icons";
 interface FormProps {
   fetchWeather: (search: SearchType) => Promise<void>;
 }
+
+// Lista de ciudades por país (puedes expandirla según necesidad)
+const citiesByCountry: Record<string, string[]> = {
+  US: ["New York", "Los Angeles", "Chicago", "Miami", "Houston"],
+  MX: ["Ciudad de México", "Guadalajara", "Monterrey", "Cancún", "Puebla"],
+  AR: ["Buenos Aires", "Córdoba", "Rosario", "Mendoza", "La Plata"],
+  CO: ["Bogotá", "Medellín", "Cali", "Barranquilla", "Cartagena"],
+  BR: ["São Paulo", "Rio de Janeiro", "Brasília", "Salvador", "Fortaleza"],
+  CL: ["Santiago", "Valparaíso", "Concepción", "La Serena", "Antofagasta"],
+  ES: ["Madrid", "Barcelona", "Valencia", "Sevilla", "Zaragoza"],
+  PE: ["Lima", "Arequipa", "Trujillo", "Cusco", "Chiclayo"],
+};
 
 const Form = forwardRef<HTMLFormElement, FormProps>(({ fetchWeather }, ref) => {
   const [search, setSearch] = useState<SearchType>({
@@ -21,6 +33,16 @@ const Form = forwardRef<HTMLFormElement, FormProps>(({ fetchWeather }, ref) => {
     country: false,
     city: false,
   });
+
+  // Sugerencias de ciudades
+  const citySuggestions = useMemo(() => {
+    if (!search.country || !search.city) return [];
+    const cities = citiesByCountry[search.country] || [];
+    return cities.filter((city) =>
+      city.toLowerCase().startsWith(search.city.toLowerCase())
+    );
+  }, [search.country, search.city]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
 
   // Limpiar alerta a los 3 segundos
   useEffect(() => {
@@ -183,8 +205,15 @@ const Form = forwardRef<HTMLFormElement, FormProps>(({ fetchWeather }, ref) => {
                 name="city"
                 placeholder="Ej: Madrid, Barcelona, Valencia..."
                 value={search.city}
-                onChange={handleChange}
-                onBlur={() => handleBlur("city")}
+                onChange={(e) => {
+                  handleChange(e);
+                  setShowSuggestions(true);
+                }}
+                onBlur={() => {
+                  handleBlur("city");
+                  setTimeout(() => setShowSuggestions(false), 100); // Espera para permitir click
+                }}
+                onFocus={() => setShowSuggestions(true)}
                 className={`${styles.input} ${
                   getFieldError("city") ? styles.error : ""
                 }`}
@@ -194,6 +223,22 @@ const Form = forwardRef<HTMLFormElement, FormProps>(({ fetchWeather }, ref) => {
                 }
                 autoComplete="off"
               />
+              {showSuggestions && citySuggestions.length > 0 && (
+                <ul className={styles.suggestionsList}>
+                  {citySuggestions.map((suggestion) => (
+                    <li
+                      key={suggestion}
+                      className={styles.suggestionItem}
+                      onMouseDown={() => {
+                        setSearch((prev) => ({ ...prev, city: suggestion }));
+                        setShowSuggestions(false);
+                      }}
+                    >
+                      {suggestion}
+                    </li>
+                  ))}
+                </ul>
+              )}
               {getFieldError("city") && (
                 <span id="city-error" className={styles.errorMessage}>
                   {getFieldError("city")}

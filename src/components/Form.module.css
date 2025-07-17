@@ -323,3 +323,27 @@ select option {
   color: #fff;
   padding: 1rem;
 }
+
+.suggestionsList {
+  position: absolute;
+  z-index: 10;
+  color: #000;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  width: 100%;
+  max-height: 180px;
+  overflow-y: auto;
+  margin-top: 0.2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 0;
+  list-style: none;
+}
+.suggestionItem {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.suggestionItem:hover {
+  background: #f3f4f6;
+}

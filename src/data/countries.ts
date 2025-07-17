@@ -4,7 +4,8 @@ export const countries : Country[] = [
     { code: 'MX', name: 'México' },
     { code: 'AR', name: 'Argentina' },
     { code: 'CO', name: 'Colombia' },
-    { code: 'CR', name: 'Costa Rica' },
+    { code: 'BR', name: 'Brasil' },
+    { code: 'CL', name: 'Chile' },
     { code: 'ES', name: 'España' },
     { code: 'PE', name: 'Perú' }
   ]
