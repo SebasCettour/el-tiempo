@@ -12,14 +12,14 @@ interface FormProps {
 
 // Lista de ciudades por país (puedes expandirla según necesidad)
 const citiesByCountry: Record<string, string[]> = {
-  US: ["New York", "Los Angeles", "Chicago", "Miami", "Houston"],
-  MX: ["Ciudad de México", "Guadalajara", "Monterrey", "Cancún", "Puebla"],
-  AR: ["Buenos Aires", "Córdoba", "Rosario", "Mendoza", "La Plata"],
-  CO: ["Bogotá", "Medellín", "Cali", "Barranquilla", "Cartagena"],
-  BR: ["São Paulo", "Rio de Janeiro", "Brasília", "Salvador", "Fortaleza"],
-  CL: ["Santiago", "Valparaíso", "Concepción", "La Serena", "Antofagasta"],
-  ES: ["Madrid", "Barcelona", "Valencia", "Sevilla", "Zaragoza"],
-  PE: ["Lima", "Arequipa", "Trujillo", "Cusco", "Chiclayo"],
+  US: ["New York", "Los Angeles", "Chicago", "Miami", "Houston", "Phoenix", "Philadelphia", "San Antonio", "An Diego", "Dallas", "San Jose", "Austin", "Jacksonville", "Fort Worth", "Columbus", "Charlotte", "San Francisco", "Indianapolis", "Seattle", "Denver"],
+  MX: ["Ciudad de México", "Guadalajara", "Monterrey", "Cancún", "Puebla", "Tijuana", "Mérida", "León", "Zapopan", "Acapulco", "Chihuahua", "San Luis Potosí", "Aguascalientes", "Hermosillo", "Saltillo", "Morelia", "Veracruz", "Tampico", "Durango", "Querétaro"],
+  AR: ["Buenos Aires", "Córdoba", "Rosario", "Mendoza", "La Plata", "San Miguel de Tucumán", "Mar del Plata", "Salta", "Santa Fe", "San Juan", "Resistencia", "Santiago del Estero", "Posadas", "Neuquén", "Bahía Blanca", "Paraná", "Formosa", "La Rioja", "San Luis", "Catamarca"],
+  CO: ["Bogotá", "Medellín", "Cali", "Barranquilla", "Cartagena", "Cúcuta", "Bucaramanga", "Pereira", "Ibagué", "Pasto", "Manizales", "Neiva", "Villavicencio", "Popayán", "Valledupar", "Montería", "Sincelejo", "Tunja", "Florencia", "Riohacha"],
+  BR: ["São Paulo", "Rio de Janeiro", "Brasília", "Salvador", "Fortaleza", "Belo Horizonte", "Manaus", "Curitiba", "Recife", "Porto Alegre", "Belém", "Goiânia", "Guarulhos", "Campinas", "Nova Iguaçu", "São Gonçalo", "Maceió", "Duque de Caxias", "Natal", "Teresina"],
+  CL: ["Santiago", "Valparaíso", "Concepción", "La Serena", "Antofagasta", "Viña del Mar", "Temuco", "Rancagua", "Talca", "Arica", "Iquique", "Puerto Montt", "Coquimbo", "Osorno", "Los Ángeles", "Calama", "Copiapó", "Quilpué", "Valdivia", "Punta Arenas"],
+  ES: ["Madrid", "Barcelona", "Valencia", "Sevilla", "Zaragoza", "Málaga", "Murcia", "Palma", "Las Palmas", "Bilbao", "Alicante", "Córdoba", "Valladolid", "Vigo", "Gijón", "L'Hospitalet", "A Coruña", "Vitoria", "Granada", "Elche"],
+  PE: ["Lima", "Arequipa", "Trujillo", "Cusco", "Chiclayo", "Piura", "Iquitos", "Chimbote", "Huaraz", "Ica", "Tacna", "Juliaca", "Cajamarca", "Pucallpa", "Sullana", "Chincha Alta", "Huaral", "Ayacucho", "Tarapoto", "Puno"]
 };
 
 const Form = forwardRef<HTMLFormElement, FormProps>(({ fetchWeather }, ref) => {
