@@ -28,7 +28,8 @@
 }
 
 .form:hover {
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 12px 40px rgba(168, 85, 247, 0.4);
+  transform: translateY(-2px);
 }
 
 /* Encabezado */
@@ -196,6 +197,30 @@
 /* Alertas */
 .alertContainer {
   margin: 1rem 0;
+}
+
+.formAlert {
+  text-align: center;
+  padding: 1rem 1.5rem;
+  border-radius: 0.8rem;
+  font-weight: 600;
+  font-size: 1.4rem;
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.25), rgba(220, 38, 38, 0.2));
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(252, 165, 165, 0.4);
+  color: #fca5a5;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Responsive */

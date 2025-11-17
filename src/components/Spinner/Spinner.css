@@ -12,7 +12,7 @@
 .sk-cube {
   width: 100%;
   height: 100%;
-  background-color: #012130;
+  background-color: #581c87;
   border-radius: 4px;
   animation: sk-cubeGridScaleDelay 1.5s infinite ease-in-out;
 }
@@ -20,11 +20,11 @@
 @keyframes sk-cubeGridScaleDelay {
   0%, 100% {
     transform: scale(1);
-    background-color: #a6aff1;
+    background-color: #c084fc;
   }
   50% {
     transform: scale(0.5);
-    background-color: #6c79db;
+    background-color: #a855f7;
   }
 }
 

@@ -15,8 +15,9 @@ import {
   faWind,
   faCloudRain,
   faLocationDot,
+  faCloud,
 } from "@fortawesome/free-solid-svg-icons";
-import { memo } from "react";
+import { memo, useMemo } from "react";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 
 interface WeatherDetailProps {
@@ -52,6 +53,19 @@ const WeatherDetail = memo<WeatherDetailProps>(
     const hasWeatherData = weather.weather.length > 0;
     const currentWeather = hasWeatherData ? weather.weather[0] : null;
     const rainAmount = weather.rain?.["1h"];
+
+    const weatherQuality = useMemo(() => {
+      if (!hasWeatherData) return "";
+      const temp = weather.main.temp - 273.15;
+      const humidity = weather.main.humidity;
+      
+      if (temp >= 18 && temp <= 25 && humidity >= 40 && humidity <= 60) {
+        return "Condiciones ideales 😊";
+      } else if (temp < 10 || temp > 30) {
+        return "Condiciones extremas ⚠️";
+      }
+      return "Condiciones normales ☁️";
+    }, [hasWeatherData, weather.main.temp, weather.main.humidity]);
 
     if (!hasWeatherData) {
       return (
@@ -89,7 +103,7 @@ const WeatherDetail = memo<WeatherDetailProps>(
             El tiempo en <span className={styles.cityName}>{weather.name}</span>
           </h2>
           <p className={styles.localTime}>
-            Hora: {getLocalTime(weather.timezone)}
+            Hora: {getLocalTime(weather.timezone)} • {weatherQuality}
           </p>
         </header>
 
@@ -158,6 +172,14 @@ const WeatherDetail = memo<WeatherDetailProps>(
               label="Lluvias"
               value={rainAmount !== undefined ? `${rainAmount} mm` : "-"}
               className={styles.rain}
+            />
+
+            <WeatherInfoItem
+              icon={faCloud}
+              label="Nubosidad"
+              value={weather.clouds.all}
+              unit="%"
+              className={styles.clouds}
             />
           </section>
 

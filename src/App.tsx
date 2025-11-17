@@ -1,9 +1,9 @@
 import { useEffect, useState, useCallback, useRef } from "react";
-import Alert from "./Alert/Alert";
 import styles from "./App.module.css";
 import Form from "./components/Form";
 import Spinner from "./components/Spinner/Spinner";
 import WeatherDetail from "./components/WeatherDetail/WeatherDetail";
+import Toast from "./components/Toast/Toast";
 import useWeather from "./hooks/useWeather";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -42,6 +42,7 @@ function App() {
   const [showHistory, setShowHistory] = useState(false);
   const [showHelp, setShowHelp] = useState(false);
   const [lastSearchData, setLastSearchData] = useState<SearchType | null>(null);
+  const [toast, setToast] = useState<{ message: string; type: "success" | "error" | "info" } | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
 
   // Load search history from localStorage
@@ -133,8 +134,11 @@ function App() {
       setIsFirstLoad(false);
       addToHistory(searchData);
       await fetchWeather(searchData);
+      if (!loading && hasWeatherData) {
+        setToast({ message: "Clima actualizado correctamente", type: "success" });
+      }
     },
-    [fetchWeather, addToHistory]
+    [fetchWeather, addToHistory, loading, hasWeatherData]
   );
 
   const handleRefresh = useCallback(() => {
@@ -190,14 +194,39 @@ function App() {
     setLastSearchData(null);
   }, [resetState]);
 
+  const copyToClipboard = useCallback(async () => {
+    if (!hasWeatherData || !lastSearch) return;
+    
+    const weatherText = `🌡️ Clima en ${weather.name}\n` +
+      `Temperatura: ${Math.round(weather.main.temp - 273.15)}°C\n` +
+      `Descripción: ${weather.weather[0].description}\n` +
+      `Humedad: ${weather.main.humidity}%\n` +
+      `Viento: ${Math.round(weather.wind.speed * 3.6)} km/h`;
+    
+    try {
+      await navigator.clipboard.writeText(weatherText);
+      setToast({ message: "¡Datos copiados al portapapeles!", type: "success" });
+    } catch (err) {
+      setToast({ message: "Error al copiar al portapapeles", type: "error" });
+    }
+  }, [hasWeatherData, lastSearch, weather]);
+
   return (
     <div className={styles.app}>
+      {toast && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={() => setToast(null)}
+        />
+      )}
+      
       <header className={styles.header}>
         <div className={styles.logoContainer}>
           <FontAwesomeIcon icon={faCloudSun} className={styles.logo} />
-          <h1 className={styles.title}>Tiempo Real</h1>
+          <h1 className={styles.title}>SkyGlow</h1>
         </div>
-        <p className={styles.subtitle}>Consulta el tiempo actual</p>
+        <p className={styles.subtitle}>Donde el cielo brilla ✨</p>
 
         {/* Header Actions */}
         <div className={styles.headerActions}>
@@ -233,6 +262,17 @@ function App() {
           >
             <FontAwesomeIcon icon={faInfoCircle} />
           </button>
+
+          {hasWeatherData && (
+            <button
+              onClick={copyToClipboard}
+              className={styles.actionButton}
+              title="Copiar datos del clima"
+              aria-label="Copiar datos del clima"
+            >
+              <FontAwesomeIcon icon={faKeyboard} />
+            </button>
+          )}
         </div>
       </header>
 
@@ -243,7 +283,11 @@ function App() {
           {loading && (
             <div className={styles.loadingContainer}>
               <Spinner />
-              <p className={styles.loadingText}>Consultando el clima...</p>
+              <p className={styles.loadingText}>
+                Consultando el clima...
+                <br />
+                <small>Conectando con OpenWeather API</small>
+              </p>
             </div>
           )}
 
@@ -272,15 +316,13 @@ function App() {
 
           {(notFound || error) && (
             <div className={styles.errorContainer}>
-              <Alert type="error">
-                <div className={styles.errorContent}>
-                  <FontAwesomeIcon
-                    icon={faLocationDot}
-                    className={styles.errorIcon}
-                  />
-                  <span>{error || "Ciudad no encontrada"}</span>
-                </div>
-              </Alert>
+              <div className={styles.errorAlert}>
+                <FontAwesomeIcon
+                  icon={faLocationDot}
+                  className={styles.errorIcon}
+                />
+                <span>{error || "Ciudad no encontrada"}</span>
+              </div>
             </div>
           )}
 
@@ -413,7 +455,7 @@ function App() {
 
       <footer className={styles.footer}>
         <p className={styles.footerText}>
-          © {new Date().getFullYear()} Tiempo Real
+          © {new Date().getFullYear()} SkyGlow • Powered by OpenWeather
         </p>
       </footer>
     </div>

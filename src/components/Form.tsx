@@ -2,7 +2,6 @@ import { ChangeEvent, FormEvent, useState, useEffect, forwardRef, useMemo } from
 import type { SearchType } from "../types";
 import { countries } from "../data/countries";
 import styles from "../components/Form.module.css";
-import Alert from "../Alert/Alert";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faGlobe, faCity } from "@fortawesome/free-solid-svg-icons";
 
@@ -250,7 +249,9 @@ const Form = forwardRef<HTMLFormElement, FormProps>(({ fetchWeather }, ref) => {
 
         {alert && (
           <div className={styles.alertContainer}>
-            <Alert>{alert}</Alert>
+            <div className={styles.formAlert}>
+              {alert}
+            </div>
           </div>
         )}
 
