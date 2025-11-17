@@ -14,16 +14,16 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  padding: 2rem;
+  padding: 2.5rem;
   background: linear-gradient(
     135deg,
-    rgba(255, 255, 255, 0.15),
-    rgba(255, 255, 255, 0.05)
+    rgba(168, 85, 247, 0.25),
+    rgba(236, 72, 153, 0.2)
   );
-  backdrop-filter: blur(15px);
+  backdrop-filter: blur(20px);
   border-radius: 1.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 2px solid rgba(216, 180, 254, 0.4);
+  box-shadow: 0 8px 32px rgba(168, 85, 247, 0.3), 0 0 60px rgba(236, 72, 153, 0.2);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -38,9 +38,10 @@
 }
 
 .searchIcon {
-  font-size: 2rem;
-  color: #dee2a7;
+  font-size: 2.5rem;
+  color: #c084fc;
   margin-bottom: 1rem;
+  filter: drop-shadow(0 0 8px rgba(192, 132, 252, 0.6));
 }
 
 .formTitle {
@@ -80,7 +81,8 @@
 
 .fieldIcon {
   font-size: 1.4rem;
-  color: #ffd900;
+  color: #c084fc;
+  filter: drop-shadow(0 0 4px rgba(192, 132, 252, 0.4));
 }
 
 .input,
@@ -88,24 +90,25 @@
   width: 100%;
   padding: 1rem;
   font-size: 1.5rem;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: 2px solid rgba(216, 180, 254, 0.5);
   border-radius: 0.8rem;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(88, 28, 135, 0.3);
   color: #fff;
   transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  font-weight: 500;
 }
 
 .input::placeholder {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(233, 213, 255, 0.7);
   font-size: 1.5rem;
 }
 
 .input:focus,
 .select:focus {
   outline: none;
-  border-color: #ffd700;
-  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.2);
-  background: rgba(255, 255, 255, 0.15);
+  border-color: #c084fc;
+  box-shadow: 0 0 0 3px rgba(192, 132, 252, 0.3), 0 0 20px rgba(192, 132, 252, 0.2);
+  background: rgba(168, 85, 247, 0.25);
 }
 
 .input:disabled,
@@ -135,28 +138,29 @@
 
 /* Botón */
 .submit {
-  padding: 1rem;
-  font-size: 1rem;
+  padding: 1.2rem;
+  font-size: 1.1rem;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 0.1rem;
-  color: #000000;
-  background: linear-gradient(135deg, #fcd601b0, #cfba01b9);
-  border: none;
+  color: #ffffff;
+  background: linear-gradient(135deg, #a855f7, #ec4899);
+  border: 2px solid rgba(216, 180, 254, 0.3);
   border-radius: 0.8rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.8rem;
-  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+  box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4), 0 0 30px rgba(236, 72, 153, 0.2);
   transition: all 0.3s ease;
 }
 
 .submit:hover:not(:disabled) {
-  background: linear-gradient(135deg, #ffed4e, #ffd700);
+  background: linear-gradient(135deg, #c084fc, #f472b6);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+  box-shadow: 0 6px 20px rgba(168, 85, 247, 0.5), 0 0 40px rgba(236, 72, 153, 0.3);
+  border-color: rgba(233, 213, 255, 0.5);
 }
 
 .submit:disabled {
@@ -314,12 +318,12 @@
 }
 
 select {
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(88, 28, 135, 0.4);
   color: #fff;
 }
 
 select option {
-  background-color: rgba(30, 30, 30, 0.95);
+  background-color: rgba(88, 28, 135, 0.95);
   color: #fff;
   padding: 1rem;
 }
