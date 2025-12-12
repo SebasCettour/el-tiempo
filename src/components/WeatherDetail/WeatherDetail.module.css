@@ -1,7 +1,7 @@
 .container {
   flex: 1;
-  background: linear-gradient(135deg, rgba(0,198,251,0.18), rgba(0,91,234,0.13));
-  color: #fff;
+  background: var(--card-bg, #203040);
+  color: var(--text-main, #fff);
   border-radius: 1.5rem;
   text-align: center;
   padding: 2rem;
@@ -11,9 +11,9 @@
   margin: 1rem auto;
   line-height: 1.5;
   overflow: hidden;
-  box-shadow: 0 8px 32px rgba(0,198,251,0.18), 0 0 60px rgba(0,91,234,0.13);
+  box-shadow: var(--shadow, 0 8px 32px rgba(0,198,251,0.18));
   backdrop-filter: blur(20px);
-  border: 2px solid rgba(0,198,251,0.18);
+  border: 2px solid var(--card-border, #344050);
 }
 
 .header {
@@ -182,14 +182,16 @@
 }
 
 .infoLabel {
-  font-weight: 600;
-  color: #e9d5ff;
+  font-weight: 700;
+  color: #3a2d5f;
+  text-shadow: none;
 }
 
 .infoValue {
-  font-weight: 700;
-  color: #fff;
+  font-weight: 800;
+  color: #1a1833;
   margin-left: auto;
+  text-shadow: none;
 }
 
 .temperatureRange {
@@ -217,8 +219,9 @@
 }
 
 .tempLabel {
-  color: #e9d5ff;
-  font-weight: 600;
+  color: #3a2d5f;
+  font-weight: 700;
+  text-shadow: none;
 }
 
 .tempMax {
@@ -237,7 +240,8 @@
   align-items: center;
   gap: 1rem;
   padding: 2rem;
-  color: #7f8c8d;
+  color: #3a2d5f;
+  font-weight: 600;
 }
 
 .noDataIcon {
@@ -254,8 +258,9 @@
 .localTime {
   font-size: 1.5rem;
   margin-top: 0.5rem;
-  color: #e9d5ff;
-  font-weight: 500;
+  color: #2a2340;
+  font-weight: 700;
+  text-shadow: 0 2px 8px rgba(255,255,255,0.18);
 }
 
 /* Íconos personalizados */

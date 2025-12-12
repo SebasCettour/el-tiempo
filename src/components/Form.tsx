@@ -1,12 +1,17 @@
-import { ChangeEvent, FormEvent, useState, useEffect, forwardRef, useMemo } from "react";
+import { ChangeEvent, FormEvent, useState, useEffect, forwardRef, useMemo, useImperativeHandle, useRef } from "react";
 import type { SearchType } from "../types";
 import { countries } from "../data/countries";
 import styles from "../components/Form.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faGlobe, faCity } from "@fortawesome/free-solid-svg-icons";
 
+
 interface FormProps {
   fetchWeather: (search: SearchType) => Promise<void>;
+}
+
+export interface FormHandle {
+  reset: () => void;
 }
 
 // Lista de ciudades por país (puedes expandirla según necesidad)
@@ -21,7 +26,9 @@ const citiesByCountry: Record<string, string[]> = {
   PE: ["Lima", "Arequipa", "Trujillo", "Cusco", "Chiclayo", "Piura", "Iquitos", "Chimbote", "Huaraz", "Ica", "Tacna", "Juliaca", "Cajamarca", "Pucallpa", "Sullana", "Chincha Alta", "Huaral", "Ayacucho", "Tarapoto", "Puno"]
 };
 
-const Form = forwardRef<HTMLFormElement, FormProps>(({ fetchWeather }, ref) => {
+
+
+const Form = forwardRef<FormHandle, FormProps>(({ fetchWeather }, ref) => {
   const [search, setSearch] = useState<SearchType>({
     country: "",
     city: "",
@@ -32,6 +39,19 @@ const Form = forwardRef<HTMLFormElement, FormProps>(({ fetchWeather }, ref) => {
     country: false,
     city: false,
   });
+
+  // Permitir limpiar el formulario desde el padre
+  const formElementRef = useRef<HTMLFormElement>(null);
+  useImperativeHandle(ref, () => ({
+    reset: () => {
+      setSearch({ country: "", city: "" });
+      setTouched({ country: false, city: false });
+      setAlert("");
+      if (formElementRef.current) {
+        formElementRef.current.reset();
+      }
+    },
+  }), []);
 
   // Sugerencias de ciudades
   const citySuggestions = useMemo(() => {
@@ -142,7 +162,7 @@ const Form = forwardRef<HTMLFormElement, FormProps>(({ fetchWeather }, ref) => {
   return (
     <div className={styles.formWrapper}>
       <form
-        ref={ref}
+        ref={formElementRef}
         className={styles.form}
         onSubmit={handleSubmit}
         noValidate

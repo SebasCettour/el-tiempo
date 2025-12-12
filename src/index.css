@@ -1,5 +1,38 @@
 /* =================Variables ================= */
 :root {
+  /* Paleta modo claro (por defecto) */
+  --background-main: #f8fafc;
+  --background-gradient: linear-gradient(135deg, #e0e7ef 0%, #cfd8e3 100%);
+  --text-main: #203040;
+  --card-bg: #fff;
+  --card-border: #e0e7ef;
+  --input-bg: #f3f4f6;
+  --input-border: #cfd8e3;
+  --button-bg: #00c6fb;
+  --button-bg-hover: #005bea;
+  --button-text: #fff;
+  --accent: #00c6fb;
+  --accent-yellow: #ffe066;
+  --shadow: 0 4px 16px rgba(0,198,251,0.08);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-main: #0f2027;
+    --background-gradient: linear-gradient(135deg, #2c5364 0%, #203a43 50%, #0f2027 100%);
+    --text-main: #fff;
+    --card-bg: #203040;
+    --card-border: #344050;
+    --input-bg: #203040;
+    --input-border: #344050;
+    --button-bg: #005bea;
+    --button-bg-hover: #00c6fb;
+    --button-text: #fff;
+    --accent: #00c6fb;
+    --accent-yellow: #ffe066;
+    --shadow: 0 4px 24px rgba(0,198,251,0.18);
+  }
+}
 
   /* Nueva paleta SkyGlow */
   --white: #ffffff;
@@ -99,7 +132,7 @@
   --breakpoint-lg: 1024px;
   --breakpoint-xl: 1280px;
   --breakpoint-2xl: 1536px;
-}
+
 
 /* ================= Estilos base ================= */
 *,
@@ -119,7 +152,7 @@ html {
 }
 
 body {
-  font-family: var(--font-family-sans);
+  font-family: 'Comfortaa', 'Poppins', 'Montserrat', 'Inter', 'Roboto', Arial, Helvetica, sans-serif;
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-normal);
   line-height: var(--line-height-normal);

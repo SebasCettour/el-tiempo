@@ -192,6 +192,9 @@ function App() {
     setIsFirstLoad(true);
     setLastSearch("");
     setLastSearchData(null);
+    if (formRef.current) {
+      formRef.current.reset();
+    }
   }, [resetState]);
 
   const copyToClipboard = useCallback(async () => {

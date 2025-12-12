@@ -6,7 +6,7 @@
   position: relative;
   z-index: 0;
   overflow: hidden;
-  background: var(--gradient-primary), #0f2027;
+  background: linear-gradient(135deg, #2d0637 0%, #5e2176 60%, #7c3aed 100%);
   background-attachment: fixed;
 }
 
@@ -59,11 +59,11 @@
 .header {
   text-align: center;
   padding: 2.5rem 1rem;
-  background: linear-gradient(135deg, rgba(88, 28, 135, 0.6), rgba(126, 34, 206, 0.4));
+  background: linear-gradient(135deg, #2d0637 0%, #5e2176 60%, #7c3aed 100%);
   backdrop-filter: blur(20px);
-  border-bottom: 3px solid rgba(216, 180, 254, 0.5);
+  border-bottom: 3px solid #203a43;
   position: relative;
-  box-shadow: 0 4px 20px rgba(168, 85, 247, 0.3);
+  box-shadow: 0 4px 20px rgba(22,33,62,0.18);
 }
 
 .logoContainer {
@@ -126,15 +126,20 @@
 }
 
 .title {
-  font-size: 4.5rem;
-  font-weight: 900;
+  font-size: 5rem;
+  font-weight: 700;
   color: #fff;
-  letter-spacing: 0.6rem;
-  background: linear-gradient(135deg, #fff, #f0f8ff, #e6f3ff);
+  letter-spacing: 0.7rem;
+  text-shadow: 0 6px 24px rgba(80,0,120,0.25), 0 2px 8px rgba(0,0,0,0.22);
+  font-family: 'Comfortaa', 'Poppins', 'Montserrat', 'Inter', 'Roboto', Arial, sans-serif;
+  text-transform: uppercase;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  background: linear-gradient(90deg, rgba(168,85,247,0.85) 0%, rgba(0,198,251,0.85) 100%);
   -webkit-background-clip: text;
-  background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: titleGlow 3s ease-in-out infinite;
+  background-clip: text;
+  filter: drop-shadow(0 2px 12px rgba(80,0,120,0.18));
 }
 
 @keyframes titleGlow {
@@ -485,10 +490,10 @@
 
 .welcomeText {
   font-size: 2rem;
-  color: rgba(255, 255, 255, 0.95);
-  font-weight: 500;
+  color: #fff;
+  font-weight: 600;
   line-height: 1.5;
-  animation: textGlow 2s ease-in-out infinite;
+  text-shadow: 0 3px 16px rgba(44,0,70,0.45), 0 1px 2px rgba(0,0,0,0.25);
 }
 
 @keyframes textGlow {
