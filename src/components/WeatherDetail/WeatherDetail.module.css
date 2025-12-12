@@ -1,10 +1,6 @@
 .container {
   flex: 1;
-  background: linear-gradient(
-    135deg,
-    rgba(168, 85, 247, 0.25),
-    rgba(236, 72, 153, 0.2)
-  );
+  background: linear-gradient(135deg, rgba(0,198,251,0.18), rgba(0,91,234,0.13));
   color: #fff;
   border-radius: 1.5rem;
   text-align: center;
@@ -15,9 +11,9 @@
   margin: 1rem auto;
   line-height: 1.5;
   overflow: hidden;
-  box-shadow: 0 8px 32px rgba(168, 85, 247, 0.3), 0 0 60px rgba(236, 72, 153, 0.2);
+  box-shadow: 0 8px 32px rgba(0,198,251,0.18), 0 0 60px rgba(0,91,234,0.13);
   backdrop-filter: blur(20px);
-  border: 2px solid rgba(216, 180, 254, 0.4);
+  border: 2px solid rgba(0,198,251,0.18);
 }
 
 .header {
@@ -26,7 +22,7 @@
 
 .title {
   color: #fff;
-  background: linear-gradient(135deg, #a855f7, #ec4899, #c084fc);
+  background: linear-gradient(135deg, #00c6fb, #005bea, #7fffd4);
   background-size: 200% 200%;
   animation: gradientShift 3s ease-in-out infinite;
   font-size: 2.2rem;
@@ -36,7 +32,7 @@
   margin: 0;
   font-weight: 700;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-  border: 2px solid rgba(216, 180, 254, 0.3);
+  border: 2px solid rgba(0,198,251,0.18);
 }
 
 @keyframes gradientShift {
@@ -50,7 +46,7 @@
 }
 
 .cityName {
-  color: #fde047;
+  color: #ffe066;
   font-weight: 800;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }

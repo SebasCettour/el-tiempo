@@ -1,36 +1,32 @@
 /* =================Variables ================= */
 :root {
-  /* Colores */
+
+  /* Nueva paleta SkyGlow */
   --white: #ffffff;
   --black: #000000;
-  --primary: #f59e0b;
-  --primary-dark: #d97706;
-  --primary-light: #fbbf24;
+  --primary: #00c6fb; /* celeste brillante */
+  --primary-dark: #005bea; /* azul vibrante */
+  --primary-light: #7fffd4; /* verde menta */
+  --accent-yellow: #ffe066; /* amarillo suave */
+  --gray-50: #f8fafc;
+  --gray-100: #e0e7ef;
+  --gray-200: #cfd8e3;
+  --gray-300: #b0b8c1;
+  --gray-400: #8a99a7;
+  --gray-500: #6b7a89;
+  --gray-600: #4d5b6b;
+  --gray-700: #344050;
+  --gray-800: #203040;
+  --gray-900: #0f2027;
 
-  --gray-50: #f9fafb;
-  --gray-100: #f3f4f6;
-  --gray-200: #e5e7eb;
-  --gray-300: #d1d5db;
-  --gray-400: #9ca3af;
-  --gray-500: #6b7280;
-  --gray-600: #4b5563;
-  --gray-700: #374151;
-  --gray-800: #1f2937;
-  --gray-900: #111827;
-
-  --success: #10b981;
-  --warning: #f59e0b;
+  --success: #7fffd4;
+  --warning: #ffe066;
   --error: #ef4444;
-  --info: #3b82f6;
+  --info: #00c6fb;
 
-  --gradient-primary: linear-gradient(
-    135deg,
-    #667eea 0%,
-    #764ba2 50%,
-    #f093fb 100%
-  );
-  --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  --gradient-warm: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+  --gradient-primary: linear-gradient(135deg, #2c5364 0%, #203a43 50%, #0f2027 100%);
+  --gradient-secondary: linear-gradient(135deg, #00c6fb 0%, #005bea 100%);
+  --gradient-warm: linear-gradient(135deg, #ffe066 0%, #00c6fb 100%);
 
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1),

@@ -226,7 +226,7 @@ function App() {
           <FontAwesomeIcon icon={faCloudSun} className={styles.logo} />
           <h1 className={styles.title}>SkyGlow</h1>
         </div>
-        <p className={styles.subtitle}>Donde el cielo brilla ✨</p>
+   
 
         {/* Header Actions */}
         <div className={styles.headerActions}>
