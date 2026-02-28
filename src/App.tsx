@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback, useRef } from "react";
 import styles from "./App.module.css";
-import Form from "./components/Form";
+import Form, { FormHandle } from "./components/Form";
 import Spinner from "./components/Spinner/Spinner";
 import WeatherDetail from "./components/WeatherDetail/WeatherDetail";
 import Toast from "./components/Toast/Toast";
@@ -41,9 +41,10 @@ function App() {
   const [searchHistory, setSearchHistory] = useState<SearchHistory[]>([]);
   const [showHistory, setShowHistory] = useState(false);
   const [showHelp, setShowHelp] = useState(false);
+  const [showWeatherModal, setShowWeatherModal] = useState(false);
   const [lastSearchData, setLastSearchData] = useState<SearchType | null>(null);
   const [toast, setToast] = useState<{ message: string; type: "success" | "error" | "info" } | null>(null);
-  const formRef = useRef<HTMLFormElement>(null);
+  const formRef = useRef<FormHandle>(null);
 
   // Load search history from localStorage
   useEffect(() => {
@@ -101,12 +102,19 @@ function App() {
       if (event.key === "Escape") {
         setShowHistory(false);
         setShowHelp(false);
+        setShowWeatherModal(false);
       }
     };
 
     window.addEventListener("keydown", handleKeyPress);
     return () => window.removeEventListener("keydown", handleKeyPress);
   }, [lastSearchData]);
+
+  useEffect(() => {
+    if (hasWeatherData && !loading) {
+      setShowWeatherModal(true);
+    }
+  }, [hasWeatherData, loading]);
 
   const addToHistory = useCallback((searchData: SearchType) => {
     const newSearch: SearchHistory = {
@@ -192,6 +200,7 @@ function App() {
     setIsFirstLoad(true);
     setLastSearch("");
     setLastSearchData(null);
+    setShowWeatherModal(false);
     if (formRef.current) {
       formRef.current.reset();
     }
@@ -294,29 +303,6 @@ function App() {
             </div>
           )}
 
-          {hasWeatherData && (
-            <div className={styles.weatherContainer}>
-              {lastSearch && (
-                <div className={styles.locationInfo}>
-                  <FontAwesomeIcon
-                    icon={faLocationDot}
-                    className={styles.locationIcon}
-                  />
-                  <span>{lastSearch}</span>
-                  <button
-                    onClick={handleReset}
-                    className={styles.resetButton}
-                    title="Limpiar resultados"
-                    aria-label="Limpiar resultados"
-                  >
-                    <FontAwesomeIcon icon={faTimes} />
-                  </button>
-                </div>
-              )}
-              <WeatherDetail weather={weather} />
-            </div>
-          )}
-
           {(notFound || error) && (
             <div className={styles.errorContainer}>
               <div className={styles.errorAlert}>
@@ -352,6 +338,52 @@ function App() {
             )}
         </div>
       </main>
+
+      {/* Weather Modal */}
+      {showWeatherModal && hasWeatherData && (
+        <div
+          className={styles.modalOverlay}
+          onClick={() => setShowWeatherModal(false)}
+        >
+          <div
+            className={`${styles.modal} ${styles.weatherModal}`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className={styles.modalHeader}>
+              <h3>Clima actual</h3>
+              <button
+                onClick={() => setShowWeatherModal(false)}
+                className={styles.closeButton}
+                aria-label="Cerrar clima"
+              >
+                <FontAwesomeIcon icon={faTimes} />
+              </button>
+            </div>
+            <div className={`${styles.modalContent} ${styles.weatherModalContent}`}>
+              {lastSearch && (
+                <div className={styles.locationInfo}>
+                  <FontAwesomeIcon
+                    icon={faLocationDot}
+                    className={styles.locationIcon}
+                  />
+                  <span>{lastSearch}</span>
+                  <button
+                    onClick={handleReset}
+                    className={styles.resetButton}
+                    title="Limpiar resultados"
+                    aria-label="Limpiar resultados"
+                  >
+                    <FontAwesomeIcon icon={faTimes} />
+                  </button>
+                </div>
+              )}
+              <div className={styles.weatherModalBody}>
+                <WeatherDetail weather={weather} />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* History Modal */}
       {showHistory && (
