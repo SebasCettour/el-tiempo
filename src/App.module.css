@@ -714,8 +714,8 @@
 }
 
 .weatherModal {
-  max-width: 1220px;
-  width: min(97vw, 1220px);
+  max-width: 1360px;
+  width: min(98vw, 1360px);
   max-height: 94vh;
   background: linear-gradient(
     145deg,
@@ -779,6 +779,31 @@
   width: min(100%, 1120px);
   max-width: 100%;
   margin: 0 auto;
+}
+
+@media (min-width: 1024px) {
+  .weatherModal {
+    max-width: 1420px;
+    width: min(98vw, 1420px);
+  }
+
+  .weatherModalContent {
+    max-height: calc(94vh - 6.2rem);
+    padding: 2.8rem;
+    gap: 1.5rem;
+  }
+
+  .weatherModalHeaderInfo h3 {
+    font-size: 2.4rem;
+  }
+
+  .weatherModalLocation {
+    font-size: 1.5rem;
+  }
+
+  .weatherDetailCompact {
+    width: min(100%, 1260px);
+  }
 }
 
 @media (max-width: 768px) {
