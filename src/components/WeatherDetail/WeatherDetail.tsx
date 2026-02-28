@@ -23,6 +23,7 @@ import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 interface WeatherDetailProps {
   weather: WeatherSchema;
   className?: string;
+  compact?: boolean;
 }
 
 interface WeatherInfoItemProps {
@@ -49,7 +50,7 @@ const WeatherInfoItem = memo<WeatherInfoItemProps>(
 WeatherInfoItem.displayName = "WeatherInfoItem";
 
 const WeatherDetail = memo<WeatherDetailProps>(
-  ({ weather, className = "" }) => {
+  ({ weather, className = "", compact = false }) => {
     const hasWeatherData = weather.weather.length > 0;
     const currentWeather = hasWeatherData ? weather.weather[0] : null;
     const rainAmount = weather.rain?.["1h"];
@@ -94,7 +95,7 @@ const WeatherDetail = memo<WeatherDetailProps>(
 
     return (
       <div
-        className={`${styles.container} ${className}`}
+        className={`${styles.container} ${compact ? styles.compact : ""} ${className}`}
         role="region"
         aria-label="Información del clima"
       >

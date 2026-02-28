@@ -248,6 +248,17 @@
 }
 
 /* Contenedor de Carga */
+.loadingOverlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(4px);
+  z-index: 1200;
+}
+
 .loadingContainer {
   display: flex;
   flex-direction: column;
@@ -703,20 +714,112 @@
 }
 
 .weatherModal {
-  max-width: 900px;
-  width: min(95vw, 900px);
+  max-width: 1220px;
+  width: min(97vw, 1220px);
+  max-height: 94vh;
+  background: linear-gradient(
+    145deg,
+    rgba(34, 10, 61, 0.94),
+    rgba(63, 28, 92, 0.9)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
 }
 
 .weatherModalContent {
-  max-height: 75vh;
+  max-height: calc(94vh - 7rem);
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.2rem;
+  overflow: hidden;
+  padding: 2.2rem;
 }
 
 .weatherModalBody {
-  max-height: calc(75vh - 6rem);
-  overflow-y: auto;
+  max-height: none;
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.weatherModalHeaderInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.weatherModalHeaderInfo h3 {
+  font-size: 2.1rem;
+}
+
+.weatherModalLocation {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.88);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.weatherModalLocation::before {
+  content: "📍";
+  font-size: 1rem;
+}
+
+.weatherModalActions {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.weatherDetailCompact {
+  width: min(100%, 1120px);
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .weatherModal {
+    width: 96vw;
+    max-height: 95vh;
+  }
+
+  .weatherModalContent {
+    max-height: calc(95vh - 6.4rem);
+    padding: 1.5rem;
+    gap: 1rem;
+  }
+
+  .weatherModalHeaderInfo h3 {
+    font-size: 1.8rem;
+  }
+
+  .weatherModalLocation {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .weatherModal {
+    width: 97vw;
+    max-height: 96vh;
+  }
+
+  .weatherModalContent {
+    max-height: calc(96vh - 6rem);
+    padding: 1.2rem;
+  }
+
+  .weatherModalHeaderInfo h3 {
+    font-size: 1.6rem;
+  }
+
+  .weatherModalLocation {
+    font-size: 1.05rem;
+  }
 }
 
 /* Historial */

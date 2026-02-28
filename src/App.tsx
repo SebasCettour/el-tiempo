@@ -292,17 +292,6 @@ function App() {
         <div className={styles.container}>
           <Form fetchWeather={handleWeatherSearch} ref={formRef} />
 
-          {loading && (
-            <div className={styles.loadingContainer}>
-              <Spinner />
-              <p className={styles.loadingText}>
-                Consultando el clima...
-                <br />
-                <small>Conectando con OpenWeather API</small>
-              </p>
-            </div>
-          )}
-
           {(notFound || error) && (
             <div className={styles.errorContainer}>
               <div className={styles.errorAlert}>
@@ -339,6 +328,19 @@ function App() {
         </div>
       </main>
 
+      {loading && (
+        <div className={styles.loadingOverlay} aria-live="polite" aria-busy="true">
+          <div className={styles.loadingContainer}>
+            <Spinner />
+            <p className={styles.loadingText}>
+              Consultando el clima...
+              <br />
+              <small>Conectando con OpenWeather API</small>
+            </p>
+          </div>
+        </div>
+      )}
+
       {/* Weather Modal */}
       {showWeatherModal && hasWeatherData && (
         <div
@@ -350,35 +352,31 @@ function App() {
             onClick={(e) => e.stopPropagation()}
           >
             <div className={styles.modalHeader}>
-              <h3>Clima actual</h3>
-              <button
-                onClick={() => setShowWeatherModal(false)}
-                className={styles.closeButton}
-                aria-label="Cerrar clima"
-              >
-                <FontAwesomeIcon icon={faTimes} />
-              </button>
+              <div className={styles.weatherModalHeaderInfo}>
+                <h3>Clima actual</h3>
+                {lastSearch && <p className={styles.weatherModalLocation}>{lastSearch}</p>}
+              </div>
+              <div className={styles.weatherModalActions}>
+                <button
+                  onClick={handleReset}
+                  className={styles.resetButton}
+                  title="Limpiar resultados"
+                  aria-label="Limpiar resultados"
+                >
+                  <FontAwesomeIcon icon={faRefresh} />
+                </button>
+                <button
+                  onClick={() => setShowWeatherModal(false)}
+                  className={styles.closeButton}
+                  aria-label="Cerrar clima"
+                >
+                  <FontAwesomeIcon icon={faTimes} />
+                </button>
+              </div>
             </div>
             <div className={`${styles.modalContent} ${styles.weatherModalContent}`}>
-              {lastSearch && (
-                <div className={styles.locationInfo}>
-                  <FontAwesomeIcon
-                    icon={faLocationDot}
-                    className={styles.locationIcon}
-                  />
-                  <span>{lastSearch}</span>
-                  <button
-                    onClick={handleReset}
-                    className={styles.resetButton}
-                    title="Limpiar resultados"
-                    aria-label="Limpiar resultados"
-                  >
-                    <FontAwesomeIcon icon={faTimes} />
-                  </button>
-                </div>
-              )}
               <div className={styles.weatherModalBody}>
-                <WeatherDetail weather={weather} />
+                <WeatherDetail weather={weather} compact className={styles.weatherDetailCompact} />
               </div>
             </div>
           </div>
