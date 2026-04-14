@@ -14,7 +14,7 @@ export interface FormHandle {
   reset: () => void;
 }
 
-// Lista de ciudades por país (puedes expandirla según necesidad)
+
 const citiesByCountry: Record<string, string[]> = {
   US: ["New York", "Los Angeles", "Chicago", "Miami", "Houston", "Phoenix", "Philadelphia", "San Antonio", "An Diego", "Dallas", "San Jose", "Austin", "Jacksonville", "Fort Worth", "Columbus", "Charlotte", "San Francisco", "Indianapolis", "Seattle", "Denver"],
   MX: ["Ciudad de México", "Guadalajara", "Monterrey", "Cancún", "Puebla", "Tijuana", "Mérida", "León", "Zapopan", "Acapulco", "Chihuahua", "San Luis Potosí", "Aguascalientes", "Hermosillo", "Saltillo", "Morelia", "Veracruz", "Tampico", "Durango", "Querétaro"],
@@ -40,7 +40,7 @@ const Form = forwardRef<FormHandle, FormProps>(({ fetchWeather }, ref) => {
     city: false,
   });
 
-  // Permitir limpiar el formulario desde el padre
+
   const formElementRef = useRef<HTMLFormElement>(null);
   useImperativeHandle(ref, () => ({
     reset: () => {
