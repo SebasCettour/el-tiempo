@@ -8,8 +8,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import { SearchType } from "../../types";
+import styles from "./Header.module.css";
 
-import styles from "../../App.module.css";
 
 interface HeaderProps {
   hasWeatherData: boolean;

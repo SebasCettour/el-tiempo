@@ -3,7 +3,7 @@ import { faRefresh, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 import WeatherDetail from "../WeatherDetail/WeatherDetail";
 import { WeatherSchema } from "../../hooks/useWeather";
-import styles from "../../App.module.css";
+import styles from "./WeatherModal.module.css";
 
 interface WeatherModalProps {
   weather: WeatherSchema;
@@ -19,21 +19,18 @@ export default function WeatherModal({
   onReset,
 }: WeatherModalProps) {
   return (
-    <div className={styles.modalOverlay} onClick={onClose}>
-      <div
-        className={`${styles.modal} ${styles.weatherModal}`}
-        onClick={(e) => e.stopPropagation()}
-      >
+    <div className={styles.backdrop} onClick={onClose}>
+      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <div className={styles.modalHeader}>
-          <div className={styles.weatherModalHeaderInfo}>
-            <h3>Clima actual</h3>
+          <div>
+            <h2 className={styles.modalTitle}>Clima actual</h2>
 
             {lastSearch && (
               <p className={styles.weatherModalLocation}>{lastSearch}</p>
             )}
           </div>
 
-          <div className={styles.weatherModalActions}>
+          <div className={styles.modalActions}>
             <button
               onClick={onReset}
               className={styles.resetButton}
@@ -53,7 +50,7 @@ export default function WeatherModal({
           </div>
         </div>
 
-        <div className={`${styles.modalContent} ${styles.weatherModalContent}`}>
+        <div className={styles.modalContent}>
           <div className={styles.weatherModalBody}>
             <WeatherDetail
               weather={weather}

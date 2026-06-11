@@ -1,0 +1,88 @@
+.header {
+  text-align: center;
+  padding: 2.5rem 1rem;
+
+  background: linear-gradient(135deg, #2d0637 0%, #5e2176 60%, #7c3aed 100%);
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+}
+
+.logoContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo {
+  font-size: 3.5rem;
+  color: white;
+}
+
+.title {
+  font-size: 5rem;
+  font-weight: 700;
+  letter-spacing: 0.5rem;
+
+  background: linear-gradient(90deg, #a855f7, #00c6fb);
+
+  background-clip: text;
+  -webkit-background-clip: text;
+
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  margin-top: 0.5rem;
+
+  color: rgba(255, 255, 255, 0.8);
+
+  font-size: 1.4rem;
+}
+
+.headerActions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+
+  margin-top: 1.5rem;
+}
+
+.actionButton {
+  width: 4.2rem;
+  height: 4.2rem;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+
+  color: white;
+
+  cursor: pointer;
+
+  transition: all 0.25s ease;
+}
+
+.actionButton:hover {
+  transform: translateY(-2px);
+
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.actionButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 3.5rem;
+  }
+
+  .headerActions {
+    flex-wrap: wrap;
+  }
+}
