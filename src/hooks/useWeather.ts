@@ -1,7 +1,7 @@
 import axios from "axios";
 import { z } from "zod";
 import { SearchType } from "../types";
-import { useMemo, useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 
 //Zod
 const WeatherSchema = z.object({
@@ -11,7 +11,7 @@ const WeatherSchema = z.object({
       main: z.string(),
       description: z.string(),
       icon: z.string(),
-    })
+    }),
   ),
 
   name: z.string(),
@@ -99,7 +99,7 @@ export default function useWeather() {
     try {
       // Obtener coordenadas
       const geoUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(
-        search.city
+        search.city,
       )},${encodeURIComponent(search.country)}&appid=${appId}`;
 
       const { data: geoData } = await axios.get(geoUrl);
@@ -147,12 +147,7 @@ export default function useWeather() {
     }
   }, []);
 
-  const hasWeatherData = useMemo(() => {
-    return (
-      weather.name && weather.weather.length > 0 && weather.weather[0].id !== 0
-    );
-  }, [weather]);
-
+  const hasWeatherData = !!weather.name && weather.weather.length > 0;
   const resetState = useCallback(() => {
     setWeather(initialState);
     setLoading(false);
