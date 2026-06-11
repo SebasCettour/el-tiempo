@@ -1,28 +1,18 @@
 import { useEffect, useState, useCallback, useRef } from "react";
 import styles from "./App.module.css";
 import Form, { FormHandle } from "./components/Form";
-import Spinner from "./components/Spinner/Spinner";
-import WeatherDetail from "./components/WeatherDetail/WeatherDetail";
+import LoadingOverlay from "./components/LoadingOverlay/LoadingOverlay";
 import Toast from "./components/Toast/Toast";
 import useWeather from "./hooks/useWeather";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCloudSun,
-  faLocationDot,
-  faRefresh,
-  faHistory,
-  faTimes,
-  faInfoCircle,
-  faKeyboard,
-} from "@fortawesome/free-solid-svg-icons";
 import { SearchType } from "./types";
-
-interface SearchHistory {
-  id: string;
-  city: string;
-  country: string;
-  timestamp: number;
-}
+import Header from "./components/Header/Header";
+import WeatherModal from "./components/WeatherModal/WeatherModal";
+import HistoryModal from "./components/History/HistoryModal";
+import HelpModal from "./components/Help/HelpModal";
+import type { SearchHistory } from "./types/SearchHistory";
+import ErrorAlert from "./components/ErrorAlert/ErrorAlert";
+import WelcomeState from "./components/Welcome/WelcomeState";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   const {
@@ -43,7 +33,10 @@ function App() {
   const [showHelp, setShowHelp] = useState(false);
   const [showWeatherModal, setShowWeatherModal] = useState(false);
   const [lastSearchData, setLastSearchData] = useState<SearchType | null>(null);
-  const [toast, setToast] = useState<{ message: string; type: "success" | "error" | "info" } | null>(null);
+  const [toast, setToast] = useState<{
+    message: string;
+    type: "success" | "error" | "info";
+  } | null>(null);
   const formRef = useRef<FormHandle>(null);
 
   // Load search history from localStorage
@@ -63,7 +56,7 @@ function App() {
     if (searchHistory.length > 0) {
       localStorage.setItem(
         "weatherSearchHistory",
-        JSON.stringify(searchHistory)
+        JSON.stringify(searchHistory),
       );
     }
   }, [searchHistory]);
@@ -129,7 +122,7 @@ function App() {
         (item) =>
           !(
             item.city === searchData.city && item.country === searchData.country
-          )
+          ),
       );
       return [newSearch, ...filtered.slice(0, 9)]; // Keep only last 10 searches
     });
@@ -143,10 +136,13 @@ function App() {
       addToHistory(searchData);
       await fetchWeather(searchData);
       if (!loading && hasWeatherData) {
-        setToast({ message: "Clima actualizado correctamente", type: "success" });
+        setToast({
+          message: "Clima actualizado correctamente",
+          type: "success",
+        });
       }
     },
-    [fetchWeather, addToHistory, loading, hasWeatherData]
+    [fetchWeather, addToHistory, loading, hasWeatherData],
   );
 
   const handleRefresh = useCallback(() => {
@@ -164,7 +160,7 @@ function App() {
       handleWeatherSearch(searchData);
       setShowHistory(false);
     },
-    [handleWeatherSearch]
+    [handleWeatherSearch],
   );
 
   const clearHistory = useCallback(() => {
@@ -208,16 +204,20 @@ function App() {
 
   const copyToClipboard = useCallback(async () => {
     if (!hasWeatherData || !lastSearch) return;
-    
-    const weatherText = `🌡️ Clima en ${weather.name}\n` +
+
+    const weatherText =
+      `🌡️ Clima en ${weather.name}\n` +
       `Temperatura: ${Math.round(weather.main.temp - 273.15)}°C\n` +
       `Descripción: ${weather.weather[0].description}\n` +
       `Humedad: ${weather.main.humidity}%\n` +
       `Viento: ${Math.round(weather.wind.speed * 3.6)} km/h`;
-    
+
     try {
       await navigator.clipboard.writeText(weatherText);
-      setToast({ message: "¡Datos copiados al portapapeles!", type: "success" });
+      setToast({
+        message: "¡Datos copiados al portapapeles!",
+        type: "success",
+      });
     } catch (err) {
       setToast({ message: "Error al copiar al portapapeles", type: "error" });
     }
@@ -232,265 +232,61 @@ function App() {
           onClose={() => setToast(null)}
         />
       )}
-      
-      <header className={styles.header}>
-        <div className={styles.logoContainer}>
-          <FontAwesomeIcon icon={faCloudSun} className={styles.logo} />
-          <h1 className={styles.title}>SkyGlow</h1>
-        </div>
-   
 
-        {/* Header Actions */}
-        <div className={styles.headerActions}>
-          {hasWeatherData && lastSearchData && (
-            <button
-              onClick={handleRefresh}
-              disabled={loading}
-              className={styles.actionButton}
-              title="Actualizar clima (Ctrl+R)"
-              aria-label="Actualizar clima"
-            >
-              <FontAwesomeIcon
-                icon={faRefresh}
-                className={loading ? styles.spinning : ""}
-              />
-            </button>
-          )}
-
-          <button
-            onClick={() => setShowHistory(!showHistory)}
-            className={styles.actionButton}
-            title="Historial de búsquedas"
-            aria-label="Historial de búsquedas"
-          >
-            <FontAwesomeIcon icon={faHistory} />
-          </button>
-
-          <button
-            onClick={() => setShowHelp(!showHelp)}
-            className={styles.actionButton}
-            title="Ayuda y atajos"
-            aria-label="Ayuda y atajos"
-          >
-            <FontAwesomeIcon icon={faInfoCircle} />
-          </button>
-
-          {hasWeatherData && (
-            <button
-              onClick={copyToClipboard}
-              className={styles.actionButton}
-              title="Copiar datos del clima"
-              aria-label="Copiar datos del clima"
-            >
-              <FontAwesomeIcon icon={faKeyboard} />
-            </button>
-          )}
-        </div>
-      </header>
+      <Header
+        hasWeatherData={Boolean(hasWeatherData)}
+        lastSearchData={lastSearchData}
+        loading={loading}
+        onRefresh={handleRefresh}
+        onToggleHistory={() => setShowHistory(!showHistory)}
+        onToggleHelp={() => setShowHelp(!showHelp)}
+        onCopy={copyToClipboard}
+      />
 
       <main className={styles.main}>
         <div className={styles.container}>
           <Form fetchWeather={handleWeatherSearch} ref={formRef} />
 
           {(notFound || error) && (
-            <div className={styles.errorContainer}>
-              <div className={styles.errorAlert}>
-                <FontAwesomeIcon
-                  icon={faLocationDot}
-                  className={styles.errorIcon}
-                />
-                <span>{error || "Ciudad no encontrada"}</span>
-              </div>
-            </div>
+            <ErrorAlert message={error || "Ciudad no encontrada"} />
           )}
 
           {!isFirstLoad &&
             !loading &&
             !hasWeatherData &&
             !notFound &&
-            !error && (
-              <div className={styles.welcomeContainer}>
-                <FontAwesomeIcon
-                  icon={faCloudSun}
-                  className={styles.welcomeIcon}
-                />
-                <p className={styles.welcomeText}>
-                  Ingresa una ciudad y país para consultar el clima
-                </p>
-                <div className={styles.shortcuts}>
-                  <p className={styles.shortcutText}>
-                    <FontAwesomeIcon icon={faKeyboard} />
-                    Atajos: Ctrl+K (enfoque) | Ctrl+R (actualizar)
-                  </p>
-                </div>
-              </div>
-            )}
+            !error && <WelcomeState />}
         </div>
       </main>
 
-      {loading && (
-        <div className={styles.loadingOverlay} aria-live="polite" aria-busy="true">
-          <div className={styles.loadingContainer}>
-            <Spinner />
-            <p className={styles.loadingText}>
-              Consultando el clima...
-              <br />
-              <small>Conectando con OpenWeather API</small>
-            </p>
-          </div>
-        </div>
-      )}
+      {loading && <LoadingOverlay />}
 
       {/* Weather Modal */}
       {showWeatherModal && hasWeatherData && (
-        <div
-          className={styles.modalOverlay}
-          onClick={() => setShowWeatherModal(false)}
-        >
-          <div
-            className={`${styles.modal} ${styles.weatherModal}`}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className={styles.modalHeader}>
-              <div className={styles.weatherModalHeaderInfo}>
-                <h3>Clima actual</h3>
-                {lastSearch && <p className={styles.weatherModalLocation}>{lastSearch}</p>}
-              </div>
-              <div className={styles.weatherModalActions}>
-                <button
-                  onClick={handleReset}
-                  className={styles.resetButton}
-                  title="Limpiar resultados"
-                  aria-label="Limpiar resultados"
-                >
-                  <FontAwesomeIcon icon={faRefresh} />
-                </button>
-                <button
-                  onClick={() => setShowWeatherModal(false)}
-                  className={styles.closeButton}
-                  aria-label="Cerrar clima"
-                >
-                  <FontAwesomeIcon icon={faTimes} />
-                </button>
-              </div>
-            </div>
-            <div className={`${styles.modalContent} ${styles.weatherModalContent}`}>
-              <div className={styles.weatherModalBody}>
-                <WeatherDetail weather={weather} compact className={styles.weatherDetailCompact} />
-              </div>
-            </div>
-          </div>
-        </div>
+        <WeatherModal
+          weather={weather}
+          lastSearch={lastSearch}
+          onClose={() => setShowWeatherModal(false)}
+          onReset={handleReset}
+        />
       )}
 
       {/* History Modal */}
       {showHistory && (
-        <div
-          className={styles.modalOverlay}
-          onClick={() => setShowHistory(false)}
-        >
-          <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-            <div className={styles.modalHeader}>
-              <h3>Historial de Búsquedas</h3>
-              <button
-                onClick={() => setShowHistory(false)}
-                className={styles.closeButton}
-                aria-label="Cerrar historial"
-              >
-                <FontAwesomeIcon icon={faTimes} />
-              </button>
-            </div>
-            <div className={styles.modalContent}>
-              {searchHistory.length === 0 ? (
-                <p className={styles.emptyHistory}>
-                  No hay búsquedas recientes
-                </p>
-              ) : (
-                <>
-                  <div className={styles.historyList}>
-                    {searchHistory.map((item) => (
-                      <div key={item.id} className={styles.historyItem}>
-                        <button
-                          onClick={() => handleHistoryItemClick(item)}
-                          className={styles.historyButton}
-                        >
-                          <FontAwesomeIcon icon={faLocationDot} />
-                          <span>
-                            {item.city}, {item.country}
-                          </span>
-                          <small>{formatTimestamp(item.timestamp)}</small>
-                        </button>
-                        <button
-                          onClick={() => removeHistoryItem(item.id)}
-                          className={styles.removeHistoryButton}
-                          aria-label="Eliminar del historial"
-                        >
-                          <FontAwesomeIcon icon={faTimes} />
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                  <button
-                    onClick={clearHistory}
-                    className={styles.clearHistoryButton}
-                  >
-                    Limpiar Historial
-                  </button>
-                </>
-              )}
-            </div>
-          </div>
-        </div>
+        <HistoryModal
+          searchHistory={searchHistory}
+          onClose={() => setShowHistory(false)}
+          onSelectHistory={handleHistoryItemClick}
+          onRemoveHistoryItem={removeHistoryItem}
+          onClearHistory={clearHistory}
+          formatTimestamp={formatTimestamp}
+        />
       )}
 
       {/* Help Modal */}
-      {showHelp && (
-        <div className={styles.modalOverlay} onClick={() => setShowHelp(false)}>
-          <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-            <div className={styles.modalHeader}>
-              <h3>Ayuda y Atajos</h3>
-              <button
-                onClick={() => setShowHelp(false)}
-                className={styles.closeButton}
-                aria-label="Cerrar ayuda"
-              >
-                <FontAwesomeIcon icon={faTimes} />
-              </button>
-            </div>
-            <div className={styles.modalContent}>
-              <div className={styles.helpSection}>
-                <h4>Atajos de Teclado</h4>
-                <ul className={styles.shortcutsList}>
-                  <li>
-                    <kbd>Ctrl</kbd> + <kbd>K</kbd> - Enfocar campo de ciudad
-                  </li>
-                  <li>
-                    <kbd>Ctrl</kbd> + <kbd>R</kbd> - Actualizar clima actual
-                  </li>
-                  <li>
-                    <kbd>Escape</kbd> - Cerrar modales
-                  </li>
-                </ul>
-              </div>
-              <div className={styles.helpSection}>
-                <h4>Funcionalidades</h4>
-                <ul className={styles.featuresList}>
-                  <li>Consulta el tiempo</li>
-                  <li>Historial de búsquedas recientes</li>
-                  <li>Información detallada del clima</li>
-                  <li>Diseño responsivo para todos los dispositivos</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      {showHelp && <HelpModal onClose={() => setShowHelp(false)} />}
 
-      <footer className={styles.footer}>
-        <p className={styles.footerText}>
-          © {new Date().getFullYear()} SkyGlow • Powered by OpenWeather
-        </p>
-      </footer>
+      <Footer />
     </div>
   );
 }
