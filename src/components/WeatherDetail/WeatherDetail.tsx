@@ -44,7 +44,7 @@ const WeatherInfoItem = memo<WeatherInfoItemProps>(
         {unit}
       </span>
     </div>
-  )
+  ),
 );
 
 WeatherInfoItem.displayName = "WeatherInfoItem";
@@ -59,7 +59,7 @@ const WeatherDetail = memo<WeatherDetailProps>(
       if (!hasWeatherData) return "";
       const temp = weather.main.temp - 273.15;
       const humidity = weather.main.humidity;
-      
+
       if (temp >= 18 && temp <= 25 && humidity >= 40 && humidity <= 60) {
         return "Condiciones ideales 😊";
       } else if (temp < 10 || temp > 30) {
@@ -84,7 +84,7 @@ const WeatherDetail = memo<WeatherDetailProps>(
 
     const getLocalTime = (timezoneOffset: number): string => {
       const nowUTC = new Date(
-        new Date().getTime() + new Date().getTimezoneOffset() * 60000
+        new Date().getTime() + new Date().getTimezoneOffset() * 60000,
       );
       const localTime = new Date(nowUTC.getTime() + timezoneOffset * 1000);
       return localTime.toLocaleTimeString("es-AR", {
@@ -99,40 +99,42 @@ const WeatherDetail = memo<WeatherDetailProps>(
         role="region"
         aria-label="Información del clima"
       >
-        <header className={styles.header}>
-          <h2 className={styles.title}>
-            El tiempo en <span className={styles.cityName}>{weather.name}</span>
-          </h2>
-          <p className={styles.localTime}>
-            Hora: {getLocalTime(weather.timezone)} • {weatherQuality}
+        <header className={styles.hero}>
+          <h2 className={styles.cityName}>{weather.name}</h2>
+
+          <p className={styles.localTime}>{getLocalTime(weather.timezone)}</p>
+
+          <div className={styles.weatherIconContainer}>
+            <img
+              className={styles.weatherIcon}
+              src={`https://openweathermap.org/img/wn/${currentWeather?.icon}@4x.png`}
+              alt={`Icono de ${currentWeather?.description}`}
+              loading="lazy"
+            />
+          </div>
+
+          <p className={styles.currentTemp}>
+            {formatTemperature(weather.main.temp)}°
           </p>
+
+          <p className={styles.description}>{currentWeather?.description}</p>
+
+          <p className={styles.weatherQuality}>{weatherQuality}</p>
+
+          <div className={styles.temperatureRange}>
+            <div className={styles.tempChip}>
+              <FontAwesomeIcon icon={faTemperatureArrowUp} />
+              {formatTemperature(weather.main.temp_max)}°
+            </div>
+
+            <div className={styles.tempChip}>
+              <FontAwesomeIcon icon={faTemperatureArrowDown} />
+              {formatTemperature(weather.main.temp_min)}°
+            </div>
+          </div>
         </header>
 
         <main className={styles.mainContent}>
-          {/* Clima actual */}
-          <section className={styles.currentWeather} aria-label="Clima actual">
-            <div className={styles.weatherIconContainer}>
-              <img
-                className={styles.weatherIcon}
-                src={`https://openweathermap.org/img/wn/${currentWeather?.icon}@2x.png`}
-                alt={`Icono de ${currentWeather?.description}`}
-                loading="lazy"
-              />
-            </div>
-
-            <div className={styles.temperatureContainer}>
-              <p className={styles.currentTemp} aria-label="Temperatura actual">
-                {formatTemperature(weather.main.temp)}°C
-              </p>
-              <p
-                className={styles.description}
-                aria-label="Descripción del clima"
-              >
-                {currentWeather?.description}
-              </p>
-            </div>
-          </section>
-
           {/* Detalles del Tiempo */}
           <section className={styles.details} aria-label="Detalles del clima">
             <WeatherInfoItem
@@ -163,7 +165,7 @@ const WeatherDetail = memo<WeatherDetailProps>(
               icon={faWind}
               label="Viento"
               value={`${getWindDirection(weather.wind.deg)} (${windSpeedKmH(
-                weather.wind.speed
+                weather.wind.speed,
               )} km/h)`}
               className={styles.wind}
             />
@@ -183,40 +185,10 @@ const WeatherDetail = memo<WeatherDetailProps>(
               className={styles.clouds}
             />
           </section>
-
-          {/* Temp max-min*/}
-          <section
-            className={styles.temperatureRange}
-            aria-label="Rango de temperaturas"
-          >
-            <div className={styles.tempItem}>
-              <FontAwesomeIcon
-                icon={faTemperatureArrowUp}
-                className={styles.tempIcon}
-                aria-hidden="true"
-              />
-              <span className={styles.tempLabel}>Máx:</span>
-              <span className={styles.tempMax}>
-                {formatTemperature(weather.main.temp_max)}°C
-              </span>
-            </div>
-
-            <div className={styles.tempItem}>
-              <FontAwesomeIcon
-                icon={faTemperatureArrowDown}
-                className={styles.tempIcon}
-                aria-hidden="true"
-              />
-              <span className={styles.tempLabel}>Mín:</span>
-              <span className={styles.tempMin}>
-                {formatTemperature(weather.main.temp_min)}°C
-              </span>
-            </div>
-          </section>
         </main>
       </div>
     );
-  }
+  },
 );
 
 WeatherDetail.displayName = "WeatherDetail";
