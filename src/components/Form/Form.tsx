@@ -1,10 +1,18 @@
-import { ChangeEvent, FormEvent, useState, useEffect, forwardRef, useMemo, useImperativeHandle, useRef } from "react";
-import type { SearchType } from "../types";
-import { countries } from "../data/countries";
-import styles from "../components/Form.module.css";
+import {
+  ChangeEvent,
+  FormEvent,
+  useState,
+  useEffect,
+  forwardRef,
+  useMemo,
+  useImperativeHandle,
+  useRef,
+} from "react";
+import type { SearchType } from "../../types";
+import { countries } from "../../data/countries";
+import styles from "./form.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faGlobe, faCity } from "@fortawesome/free-solid-svg-icons";
-
 
 interface FormProps {
   fetchWeather: (search: SearchType) => Promise<void>;
@@ -14,19 +22,184 @@ export interface FormHandle {
   reset: () => void;
 }
 
-
 const citiesByCountry: Record<string, string[]> = {
-  US: ["New York", "Los Angeles", "Chicago", "Miami", "Houston", "Phoenix", "Philadelphia", "San Antonio", "An Diego", "Dallas", "San Jose", "Austin", "Jacksonville", "Fort Worth", "Columbus", "Charlotte", "San Francisco", "Indianapolis", "Seattle", "Denver"],
-  MX: ["Ciudad de México", "Guadalajara", "Monterrey", "Cancún", "Puebla", "Tijuana", "Mérida", "León", "Zapopan", "Acapulco", "Chihuahua", "San Luis Potosí", "Aguascalientes", "Hermosillo", "Saltillo", "Morelia", "Veracruz", "Tampico", "Durango", "Querétaro"],
-  AR: ["Buenos Aires", "Córdoba", "Rosario", "Mendoza", "La Plata", "San Miguel de Tucumán", "Mar del Plata", "Salta", "Santa Fe", "San Juan", "Resistencia", "Santiago del Estero", "Posadas", "Neuquén", "Bahía Blanca", "Paraná", "Formosa", "La Rioja", "San Luis", "Catamarca"],
-  CO: ["Bogotá", "Medellín", "Cali", "Barranquilla", "Cartagena", "Cúcuta", "Bucaramanga", "Pereira", "Ibagué", "Pasto", "Manizales", "Neiva", "Villavicencio", "Popayán", "Valledupar", "Montería", "Sincelejo", "Tunja", "Florencia", "Riohacha"],
-  BR: ["São Paulo", "Rio de Janeiro", "Brasília", "Salvador", "Fortaleza", "Belo Horizonte", "Manaus", "Curitiba", "Recife", "Porto Alegre", "Belém", "Goiânia", "Guarulhos", "Campinas", "Nova Iguaçu", "São Gonçalo", "Maceió", "Duque de Caxias", "Natal", "Teresina"],
-  CL: ["Santiago", "Valparaíso", "Concepción", "La Serena", "Antofagasta", "Viña del Mar", "Temuco", "Rancagua", "Talca", "Arica", "Iquique", "Puerto Montt", "Coquimbo", "Osorno", "Los Ángeles", "Calama", "Copiapó", "Quilpué", "Valdivia", "Punta Arenas"],
-  ES: ["Madrid", "Barcelona", "Valencia", "Sevilla", "Zaragoza", "Málaga", "Murcia", "Palma", "Las Palmas", "Bilbao", "Alicante", "Córdoba", "Valladolid", "Vigo", "Gijón", "L'Hospitalet", "A Coruña", "Vitoria", "Granada", "Elche"],
-  PE: ["Lima", "Arequipa", "Trujillo", "Cusco", "Chiclayo", "Piura", "Iquitos", "Chimbote", "Huaraz", "Ica", "Tacna", "Juliaca", "Cajamarca", "Pucallpa", "Sullana", "Chincha Alta", "Huaral", "Ayacucho", "Tarapoto", "Puno"]
+  US: [
+    "New York",
+    "Los Angeles",
+    "Chicago",
+    "Miami",
+    "Houston",
+    "Phoenix",
+    "Philadelphia",
+    "San Antonio",
+    "An Diego",
+    "Dallas",
+    "San Jose",
+    "Austin",
+    "Jacksonville",
+    "Fort Worth",
+    "Columbus",
+    "Charlotte",
+    "San Francisco",
+    "Indianapolis",
+    "Seattle",
+    "Denver",
+  ],
+  MX: [
+    "Ciudad de México",
+    "Guadalajara",
+    "Monterrey",
+    "Cancún",
+    "Puebla",
+    "Tijuana",
+    "Mérida",
+    "León",
+    "Zapopan",
+    "Acapulco",
+    "Chihuahua",
+    "San Luis Potosí",
+    "Aguascalientes",
+    "Hermosillo",
+    "Saltillo",
+    "Morelia",
+    "Veracruz",
+    "Tampico",
+    "Durango",
+    "Querétaro",
+  ],
+  AR: [
+    "Buenos Aires",
+    "Córdoba",
+    "Rosario",
+    "Mendoza",
+    "La Plata",
+    "San Miguel de Tucumán",
+    "Mar del Plata",
+    "Salta",
+    "Santa Fe",
+    "San Juan",
+    "Resistencia",
+    "Santiago del Estero",
+    "Posadas",
+    "Neuquén",
+    "Bahía Blanca",
+    "Paraná",
+    "Formosa",
+    "La Rioja",
+    "San Luis",
+    "Catamarca",
+  ],
+  CO: [
+    "Bogotá",
+    "Medellín",
+    "Cali",
+    "Barranquilla",
+    "Cartagena",
+    "Cúcuta",
+    "Bucaramanga",
+    "Pereira",
+    "Ibagué",
+    "Pasto",
+    "Manizales",
+    "Neiva",
+    "Villavicencio",
+    "Popayán",
+    "Valledupar",
+    "Montería",
+    "Sincelejo",
+    "Tunja",
+    "Florencia",
+    "Riohacha",
+  ],
+  BR: [
+    "São Paulo",
+    "Rio de Janeiro",
+    "Brasília",
+    "Salvador",
+    "Fortaleza",
+    "Belo Horizonte",
+    "Manaus",
+    "Curitiba",
+    "Recife",
+    "Porto Alegre",
+    "Belém",
+    "Goiânia",
+    "Guarulhos",
+    "Campinas",
+    "Nova Iguaçu",
+    "São Gonçalo",
+    "Maceió",
+    "Duque de Caxias",
+    "Natal",
+    "Teresina",
+  ],
+  CL: [
+    "Santiago",
+    "Valparaíso",
+    "Concepción",
+    "La Serena",
+    "Antofagasta",
+    "Viña del Mar",
+    "Temuco",
+    "Rancagua",
+    "Talca",
+    "Arica",
+    "Iquique",
+    "Puerto Montt",
+    "Coquimbo",
+    "Osorno",
+    "Los Ángeles",
+    "Calama",
+    "Copiapó",
+    "Quilpué",
+    "Valdivia",
+    "Punta Arenas",
+  ],
+  ES: [
+    "Madrid",
+    "Barcelona",
+    "Valencia",
+    "Sevilla",
+    "Zaragoza",
+    "Málaga",
+    "Murcia",
+    "Palma",
+    "Las Palmas",
+    "Bilbao",
+    "Alicante",
+    "Córdoba",
+    "Valladolid",
+    "Vigo",
+    "Gijón",
+    "L'Hospitalet",
+    "A Coruña",
+    "Vitoria",
+    "Granada",
+    "Elche",
+  ],
+  PE: [
+    "Lima",
+    "Arequipa",
+    "Trujillo",
+    "Cusco",
+    "Chiclayo",
+    "Piura",
+    "Iquitos",
+    "Chimbote",
+    "Huaraz",
+    "Ica",
+    "Tacna",
+    "Juliaca",
+    "Cajamarca",
+    "Pucallpa",
+    "Sullana",
+    "Chincha Alta",
+    "Huaral",
+    "Ayacucho",
+    "Tarapoto",
+    "Puno",
+  ],
 };
-
-
 
 const Form = forwardRef<FormHandle, FormProps>(({ fetchWeather }, ref) => {
   const [search, setSearch] = useState<SearchType>({
@@ -40,25 +213,28 @@ const Form = forwardRef<FormHandle, FormProps>(({ fetchWeather }, ref) => {
     city: false,
   });
 
-
   const formElementRef = useRef<HTMLFormElement>(null);
-  useImperativeHandle(ref, () => ({
-    reset: () => {
-      setSearch({ country: "", city: "" });
-      setTouched({ country: false, city: false });
-      setAlert("");
-      if (formElementRef.current) {
-        formElementRef.current.reset();
-      }
-    },
-  }), []);
+  useImperativeHandle(
+    ref,
+    () => ({
+      reset: () => {
+        setSearch({ country: "", city: "" });
+        setTouched({ country: false, city: false });
+        setAlert("");
+        if (formElementRef.current) {
+          formElementRef.current.reset();
+        }
+      },
+    }),
+    [],
+  );
 
   // Sugerencias de ciudades
   const citySuggestions = useMemo(() => {
     if (!search.country || !search.city) return [];
     const cities = citiesByCountry[search.country] || [];
     return cities.filter((city) =>
-      city.toLowerCase().startsWith(search.city.toLowerCase())
+      city.toLowerCase().startsWith(search.city.toLowerCase()),
     );
   }, [search.country, search.city]);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -74,7 +250,7 @@ const Form = forwardRef<FormHandle, FormProps>(({ fetchWeather }, ref) => {
   }, [alert]);
 
   const handleChange = (
-    e: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>
+    e: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>,
   ) => {
     const { name, value } = e.target;
     setSearch((prev) => ({
@@ -269,9 +445,7 @@ const Form = forwardRef<FormHandle, FormProps>(({ fetchWeather }, ref) => {
 
         {alert && (
           <div className={styles.alertContainer}>
-            <div className={styles.formAlert}>
-              {alert}
-            </div>
+            <div className={styles.formAlert}>{alert}</div>
           </div>
         )}
 

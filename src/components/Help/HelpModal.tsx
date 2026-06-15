@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
-import styles from "../../App.module.css";
+import styles from "./HelpModal.module.css";
 
 interface HelpModalProps {
   onClose: () => void;
@@ -9,10 +9,10 @@ interface HelpModalProps {
 
 export default function HelpModal({ onClose }: HelpModalProps) {
   return (
-    <div className={styles.modalOverlay} onClick={onClose}>
+    <div className={styles.backdrop} onClick={onClose}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <div className={styles.modalHeader}>
-          <h3>Ayuda y Atajos</h3>
+          <h3 className={styles.modalTitle}>Ayuda y Atajos</h3>
 
           <button
             onClick={onClose}
@@ -37,7 +37,7 @@ export default function HelpModal({ onClose }: HelpModalProps) {
               </li>
 
               <li>
-                <kbd>Escape</kbd> - Cerrar modales
+                <kbd>Esc</kbd> - Cerrar modales
               </li>
             </ul>
           </div>

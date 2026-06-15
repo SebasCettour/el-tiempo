@@ -1,6 +1,9 @@
 .header {
-  text-align: center;
-  padding: 2.5rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 1.5rem 2rem;
 
   background: linear-gradient(135deg, #2d0637 0%, #5e2176 60%, #7c3aed 100%);
 
@@ -10,20 +13,19 @@
 
 .logoContainer {
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 1rem;
+  gap: 1.2rem;
 }
 
 .logo {
-  font-size: 3.5rem;
-  color: white;
+  font-size: 3rem;
+  color: #00c6fb;
 }
 
 .title {
-  font-size: 5rem;
+  font-size: 3.8rem;
   font-weight: 700;
-  letter-spacing: 0.5rem;
+  letter-spacing: 0.15rem;
 
   background: linear-gradient(90deg, #a855f7, #00c6fb);
 
@@ -35,32 +37,36 @@
 }
 
 .subtitle {
-  margin-top: 0.5rem;
+  margin-top: -0.2rem;
 
-  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.3rem;
+  font-weight: 400;
+  letter-spacing: 0.05rem;
 
-  font-size: 1.4rem;
+  color: rgba(255, 255, 255, 0.75);
 }
 
 .headerActions {
   display: flex;
-  justify-content: center;
+  align-items: center;
   gap: 1rem;
-
-  margin-top: 1.5rem;
 }
 
 .actionButton {
   width: 4.2rem;
   height: 4.2rem;
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
   border-radius: 50%;
 
   background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.12);
 
   color: white;
-
   cursor: pointer;
 
   transition: all 0.25s ease;
@@ -70,19 +76,19 @@
   transform: translateY(-2px);
 
   background: rgba(255, 255, 255, 0.15);
-}
 
-.actionButton:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+  box-shadow: 0 8px 20px rgba(0, 198, 251, 0.2);
 }
 
 @media (max-width: 768px) {
-  .title {
-    font-size: 3.5rem;
+  .header {
+    flex-direction: column;
+    gap: 1.5rem;
+
+    text-align: center;
   }
 
-  .headerActions {
-    flex-wrap: wrap;
+  .logoContainer {
+    justify-content: center;
   }
 }

@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRefresh, faTimes } from "@fortawesome/free-solid-svg-icons";
+
+import { faRefresh, faTimes, faCopy } from "@fortawesome/free-solid-svg-icons";
 
 import WeatherDetail from "../WeatherDetail/WeatherDetail";
 import { WeatherSchema } from "../../hooks/useWeather";
@@ -10,13 +11,16 @@ interface WeatherModalProps {
   lastSearch: string;
   onClose: () => void;
   onReset: () => void;
+  onRefresh: () => void;
+  onCopy: () => void;
 }
 
 export default function WeatherModal({
   weather,
   lastSearch,
   onClose,
-  onReset,
+  onRefresh,
+  onCopy,
 }: WeatherModalProps) {
   return (
     <div className={styles.backdrop} onClick={onClose}>
@@ -32,18 +36,25 @@ export default function WeatherModal({
 
           <div className={styles.modalActions}>
             <button
-              onClick={onReset}
-              className={styles.resetButton}
-              title="Limpiar resultados"
-              aria-label="Limpiar resultados"
+              onClick={onRefresh}
+              className={styles.actionButton}
+              title="Actualizar clima"
             >
               <FontAwesomeIcon icon={faRefresh} />
             </button>
 
             <button
+              onClick={onCopy}
+              className={styles.actionButton}
+              title="Copiar datos"
+            >
+              <FontAwesomeIcon icon={faCopy} />
+            </button>
+
+            <button
               onClick={onClose}
-              className={styles.closeButton}
-              aria-label="Cerrar clima"
+              className={`${styles.actionButton} ${styles.closeButton}`}
+              title="Cerrar"
             >
               <FontAwesomeIcon icon={faTimes} />
             </button>

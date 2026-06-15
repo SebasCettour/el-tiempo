@@ -1,13 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faLocationDot,
-  faTimes,
-} from "@fortawesome/free-solid-svg-icons";
+import { faLocationDot, faTimes } from "@fortawesome/free-solid-svg-icons";
 
-import styles from "../../App.module.css";
-import { SearchHistory}  from "../../types/SearchHistory";
-
-
+import styles from "./HistoryModal.module.css";
+import { SearchHistory } from "../../types/SearchHistory";
 
 interface HistoryModalProps {
   searchHistory: SearchHistory[];
@@ -27,16 +22,10 @@ export default function HistoryModal({
   formatTimestamp,
 }: HistoryModalProps) {
   return (
-    <div
-      className={styles.modalOverlay}
-      onClick={onClose}
-    >
-      <div
-        className={styles.modal}
-        onClick={(e) => e.stopPropagation()}
-      >
+    <div className={styles.backdrop} onClick={onClose}>
+      <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <div className={styles.modalHeader}>
-          <h3>Historial de Búsquedas</h3>
+          <h3 className={styles.modalTitle}>Historial de Búsquedas</h3>
 
           <button
             onClick={onClose}
@@ -49,17 +38,12 @@ export default function HistoryModal({
 
         <div className={styles.modalContent}>
           {searchHistory.length === 0 ? (
-            <p className={styles.emptyHistory}>
-              No hay búsquedas recientes
-            </p>
+            <p className={styles.emptyHistory}>No hay búsquedas recientes</p>
           ) : (
             <>
               <div className={styles.historyList}>
                 {searchHistory.map((item) => (
-                  <div
-                    key={item.id}
-                    className={styles.historyItem}
-                  >
+                  <div key={item.id} className={styles.historyItem}>
                     <button
                       onClick={() => onSelectHistory(item)}
                       className={styles.historyButton}
@@ -70,15 +54,13 @@ export default function HistoryModal({
                         {item.city}, {item.country}
                       </span>
 
-                      <small>
-                        {formatTimestamp(item.timestamp)}
-                      </small>
+                      <small>{formatTimestamp(item.timestamp)}</small>
                     </button>
 
                     <button
                       onClick={() => onRemoveHistoryItem(item.id)}
                       className={styles.removeHistoryButton}
-                      aria-label="Eliminar del historial"
+                      aria-label="Eliminar búsqueda"
                     >
                       <FontAwesomeIcon icon={faTimes} />
                     </button>
@@ -90,7 +72,7 @@ export default function HistoryModal({
                 onClick={onClearHistory}
                 className={styles.clearHistoryButton}
               >
-                Limpiar Historial
+                Limpiar historial
               </button>
             </>
           )}

@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 import styles from "./App.module.css";
 
-import Form, { FormHandle } from "./components/Form";
+import Form, { FormHandle } from "./components/Form/Form";
 import Header from "./components/Header/Header";
 import WeatherModal from "./components/WeatherModal/WeatherModal";
 import HistoryModal from "./components/History/HistoryModal";
@@ -163,7 +163,6 @@ function App() {
         onRefresh={handleRefresh}
         onToggleHistory={() => setShowHistory((prev) => !prev)}
         onToggleHelp={() => setShowHelp((prev) => !prev)}
-        onCopy={copyToClipboard}
       />
 
       <main className={styles.main}>
@@ -190,6 +189,8 @@ function App() {
           lastSearch={lastSearch}
           onClose={() => setShowWeatherModal(false)}
           onReset={handleReset}
+          onRefresh={handleRefresh}
+          onCopy={copyToClipboard}
         />
       )}
 
