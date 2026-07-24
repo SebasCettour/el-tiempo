@@ -4,7 +4,7 @@
 
 .formWrapper {
   width: 100%;
-  padding: 2rem;
+  padding: clamp(1rem, 3dvh, 2rem);
 }
 
 .form {
@@ -12,8 +12,8 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  padding: 2.5rem;
+  gap: clamp(1rem, 2.5dvh, 2rem);
+  padding: clamp(1.4rem, 3.5dvh, 2.5rem);
   background: var(--card-bg, #fff);
   backdrop-filter: blur(20px);
   border-radius: 1.5rem;
@@ -32,27 +32,27 @@
 /* Encabezado */
 .formHeader {
   text-align: center;
-  margin-bottom: 1rem;
-  /* fondo removido */
+  margin-bottom: clamp(0.3rem, 1dvh, 1rem);
   border-radius: 0;
   padding: 0;
   box-shadow: none;
 }
 
 .searchIcon {
-  font-size: 2.5rem;
+  font-size: clamp(1.8rem, 4dvh, 2.5rem);
   color: #00c6fb;
-  margin-bottom: 1rem;
+  margin-bottom: clamp(0.4rem, 1.2dvh, 1rem);
   filter: drop-shadow(0 0 8px rgba(0, 198, 251, 0.4));
 }
 
 .formTitle {
-  font-size: 2.1rem;
+  font-size: clamp(1.5rem, 3.4dvh, 2.1rem);
   font-weight: 800;
   color: #2a2340;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
   text-shadow: none;
   letter-spacing: 0.01em;
+  line-height: 1.25;
   font-family:
     "Comfortaa", "Poppins", "Montserrat", "Inter", "Roboto", Arial, sans-serif;
 }
@@ -65,30 +65,31 @@
     0 2px 8px rgba(255, 255, 255, 0.18),
     0 1px 0 #fff;
 }
+
 /* Campos */
 .fieldsContainer {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: clamp(0.9rem, 2dvh, 1.5rem);
 }
 
 .field {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: clamp(0.4rem, 1dvh, 0.8rem);
 }
 
 .label {
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  font-size: 1.9rem;
+  font-size: clamp(1.3rem, 2.6dvh, 1.9rem);
   font-weight: 600;
   color: #fff;
 }
 
 .fieldIcon {
-  font-size: 1.4rem;
+  font-size: clamp(1.1rem, 2dvh, 1.4rem);
   color: #c084fc;
   filter: drop-shadow(0 0 4px rgba(192, 132, 252, 0.4));
 }
@@ -96,8 +97,8 @@
 .input,
 .select {
   width: 100%;
-  padding: 1rem;
-  font-size: 1.5rem;
+  padding: clamp(0.7rem, 1.6dvh, 1rem);
+  font-size: clamp(1.1rem, 2.2dvh, 1.5rem);
   border: 2px solid var(--input-border, #cfd8e3);
   border-radius: 0.8rem;
   background: var(--input-bg, #f3f4f6);
@@ -151,8 +152,8 @@
 
 /* Botón */
 .submit {
-  padding: 1.2rem;
-  font-size: 1.1rem;
+  padding: clamp(0.8rem, 1.8dvh, 1.2rem);
+  font-size: clamp(1rem, 1.9dvh, 1.1rem);
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 0.1rem;
@@ -208,15 +209,15 @@
 
 /* Alertas */
 .alertContainer {
-  margin: 1rem 0;
+  margin: 0.6rem 0;
 }
 
 .formAlert {
   text-align: center;
-  padding: 1rem 1.5rem;
+  padding: 0.8rem 1.5rem;
   border-radius: 0.8rem;
   font-weight: 600;
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   background: linear-gradient(
     135deg,
     rgba(239, 68, 68, 0.25),
@@ -242,16 +243,16 @@
 /* Responsive */
 @media (max-width: 768px) {
   .formWrapper {
-    padding: 2rem 1.5rem;
+    padding: clamp(1rem, 3dvh, 1.5rem) 1.5rem;
   }
 
   .form {
-    padding: 2rem;
-    gap: 1.5rem;
+    padding: clamp(1.2rem, 3dvh, 2rem);
+    gap: clamp(0.9rem, 2dvh, 1.5rem);
   }
 
   .formTitle {
-    font-size: 2rem;
+    font-size: clamp(1.4rem, 3.2dvh, 2rem);
   }
 
   .formSubtitle {
@@ -259,68 +260,32 @@
   }
 
   .label {
-    font-size: 1.1rem;
+    font-size: clamp(1rem, 2.2dvh, 1.1rem);
   }
 
   .input,
   .select {
-    font-size: 1.1rem;
-    padding: 1.2rem;
+    font-size: clamp(1rem, 2dvh, 1.1rem);
+    padding: clamp(0.8rem, 2dvh, 1.2rem);
   }
 
   .submit {
-    font-size: 1.2rem;
-    padding: 1.2rem;
+    font-size: clamp(1rem, 2dvh, 1.2rem);
+    padding: clamp(0.8rem, 2dvh, 1.2rem);
   }
 
   .fieldIcon,
   .submitIcon,
   .searchIcon {
-    font-size: 1.6rem;
+    font-size: clamp(1.3rem, 2.6dvh, 1.6rem);
   }
 
   .searchIcon {
-    font-size: 2.5rem;
+    font-size: clamp(1.8rem, 3.6dvh, 2.5rem);
   }
 
   .errorMessage {
     font-size: 1rem;
-  }
-}
-
-/* Responsive */
-@media (max-width: 480px) {
-  .title {
-    font-size: 2rem;
-  }
-
-  .currentTemp {
-    font-size: 2.8rem;
-  }
-
-  .description {
-    font-size: 1.4rem;
-  }
-
-  .tempItem {
-    font-size: 1.5rem;
-  }
-
-  .infoLabel,
-  .infoValue {
-    font-size: 1.4rem;
-  }
-
-  .noData p {
-    font-size: 1.4rem;
-  }
-
-  .weatherIcon {
-    width: 80px;
-  }
-
-  .noDataIcon {
-    font-size: 2.5rem;
   }
 }
 

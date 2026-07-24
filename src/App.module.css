@@ -9,7 +9,7 @@
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 3rem 1rem;
+  padding: clamp(0.75rem, 2.5dvh, 3rem) 1rem;
 }
 
 .container {
