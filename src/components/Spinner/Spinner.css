@@ -12,15 +12,44 @@
 .sk-cube {
   width: 100%;
   height: 100%;
-  background-color: #00c6fb;
+  background-color: var(--sk-color, #00c6fb);
   border-radius: 4px;
   animation: sk-cubeGridScaleDelay 1.5s infinite ease-in-out;
 }
 
+.sk-cube1 {
+  animation-delay: 0.2s;
+}
+.sk-cube2 {
+  animation-delay: 0.3s;
+}
+.sk-cube3 {
+  animation-delay: 0.4s;
+}
+.sk-cube4 {
+  animation-delay: 0.1s;
+}
+.sk-cube5 {
+  animation-delay: 0.2s;
+}
+.sk-cube6 {
+  animation-delay: 0.3s;
+}
+.sk-cube7 {
+  animation-delay: 0s;
+}
+.sk-cube8 {
+  animation-delay: 0.1s;
+}
+.sk-cube9 {
+  animation-delay: 0.2s;
+}
+
 @keyframes sk-cubeGridScaleDelay {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
-    background-color: #00c6fb;
+    background-color: var(--sk-color, #00c6fb);
   }
   50% {
     transform: scale(0.5);
@@ -28,9 +57,28 @@
   }
 }
 
+/* Texto solo para lectores de pantalla */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 @media (max-width: 480px) {
   .sk-cube-grid {
     width: 50px;
     height: 50px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sk-cube {
+    animation: none;
   }
 }
