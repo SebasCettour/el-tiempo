@@ -3,49 +3,39 @@
   <head>
     <meta charset="UTF-8" />
 
-    <!-- Viewport para buen comportamiento móvil -->
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
+    <!-- Viewport (zoom habilitado por accesibilidad) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- SEO básico -->
     <meta
       name="description"
       content="Consulta el clima actual de cualquier ciudad del mundo con SkyGlow. Interfaz moderna, datos precisos en tiempo real."
     />
-    <meta
-      name="keywords"
-      content="clima, tiempo, app del clima, skyvibe, pronóstico, React, Vite"
-    />
     <meta name="author" content="Sebastián Cettour" />
+    <meta name="theme-color" content="#0f2027" />
+    <link rel="canonical" href="https://skyglow.com.ar/" />
+
+    <!-- Open Graph / redes sociales -->
+    <meta property="og:title" content="SkyGlow" />
+    <meta
+      property="og:description"
+      content="Consulta el clima actual de cualquier ciudad del mundo con SkyGlow."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_AR" />
 
     <!-- Icono -->
-    <link rel="icon" href="/public/nube_sol.ico" type="image/x-icon" />
-    <link rel="apple-touch-icon" href="/public/nube_sol.ico" />
+    <link rel="icon" href="/nube_sol.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/nube_sol.ico" />
 
-    <!-- Google Fonts -->
+    <!-- Google Fonts (una sola request combinada) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
     <link
-      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&family=Outfit:wght@300;400;500;600;700&family=Poppins:wght@400;600;700;800&display=swap"
       rel="stylesheet"
     />
 
-    <!-- Fuente títulos -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-
-    <!-- Comfortaa para títulos -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
-
-    <!-- Título -->
     <title>SkyGlow</title>
 
     <style>
@@ -54,6 +44,8 @@
         font-size: 16px;
         scroll-behavior: smooth;
         min-height: 100vh;
+        margin: 0;
+        padding: 0;
         background: var(--background-gradient, #0f2027);
         background-attachment: fixed;
         color: var(--text-main, #fff);
@@ -62,10 +54,6 @@
       body {
         font-family: "Outfit", sans-serif;
         line-height: 1.6;
-        margin: 0;
-        padding: 0;
-        background-color: #ffffff;
-        color: #1a1a1a;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
       }
@@ -79,10 +67,12 @@
   </head>
 
   <body>
-    <!-- Punto de entrada de la app React -->
-    <main id="root" role="main" aria-label="Contenido principal"></main>
+    <main id="root" aria-label="Contenido principal"></main>
 
-    <!-- Script principal React/Vite -->
+    <noscript>
+      Esta aplicación necesita JavaScript habilitado para funcionar.
+    </noscript>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
