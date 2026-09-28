@@ -5,28 +5,15 @@ html {
 
 body {
   font-family: var(--font-family-main);
-
   min-width: 320px;
   min-height: 100vh;
-
   color: var(--color-text);
-
-  background: linear-gradient(
-    135deg,
-    #12031f 0%,
-    #2d0637 30%,
-    #5e2176 70%,
-    #7c3aed 100%
-  );
-
-  background-size: 400% 400%;
-  animation: gradientShift 18s ease infinite;
-
+  background: var(--background-gradient);
+  background-size: 240% 240%;
+  animation: gradientShift 22s ease infinite;
   overflow-x: hidden;
-
   font-weight: 400;
   line-height: 1.6;
-
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -36,10 +23,6 @@ body {
   min-height: 100vh;
   position: relative;
 }
-
-/* =========================
-   TIPOGRAFÍA GLOBAL
-========================= */
 
 h1,
 h2,
@@ -102,59 +85,33 @@ small {
   font-size: 1.3rem;
 }
 
-/* =========================
-   FONDO DECORATIVO
-========================= */
-
 body::before {
   content: "";
-
   position: fixed;
   inset: 0;
-
   background:
-    radial-gradient(
-      circle at 15% 80%,
-      rgba(0, 198, 251, 0.15),
-      transparent 45%
-    ),
-    radial-gradient(
-      circle at 85% 20%,
-      rgba(168, 85, 247, 0.18),
-      transparent 50%
-    ),
-    radial-gradient(
-      circle at 50% 50%,
-      rgba(255, 255, 255, 0.03),
-      transparent 70%
-    );
-
+    radial-gradient(circle at 12% 18%, rgba(56, 189, 248, 0.45), transparent 42%),
+    radial-gradient(circle at 88% 12%, rgba(251, 191, 36, 0.38), transparent 40%),
+    radial-gradient(circle at 78% 82%, rgba(167, 139, 250, 0.35), transparent 46%),
+    radial-gradient(circle at 50% 100%, rgba(255, 255, 255, 0.55), transparent 55%);
   animation: floatingLights 18s ease-in-out infinite;
-
   pointer-events: none;
   z-index: -2;
 }
 
 body::after {
   content: "";
-
   position: fixed;
   inset: 0;
-
   background: linear-gradient(
     120deg,
-    rgba(255, 255, 255, 0.02),
-    transparent 40%,
-    rgba(255, 255, 255, 0.02)
+    rgba(255, 255, 255, 0.18),
+    transparent 42%,
+    rgba(255, 255, 255, 0.12)
   );
-
   pointer-events: none;
   z-index: -1;
 }
-
-/* =========================
-   ELEMENTOS BASE
-========================= */
 
 a {
   color: inherit;
@@ -176,39 +133,43 @@ svg {
   max-width: 100%;
 }
 
-/* =========================
-   SELECCIÓN
-========================= */
-
 ::selection {
   background: var(--color-secondary);
   color: white;
 }
-
-/* =========================
-   SCROLLBAR
-========================= */
 
 ::-webkit-scrollbar {
   width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(15, 39, 68, 0.06);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(0, 198, 251, 0.45);
+  background: rgba(2, 132, 199, 0.45);
   border-radius: 999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 198, 251, 0.75);
+  background: rgba(2, 132, 199, 0.7);
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
+kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.8rem;
+  padding: 0.2rem 0.7rem;
+  margin: 0 0.15rem;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid var(--border-strong);
+  box-shadow: 0 1px 0 rgba(15, 39, 68, 0.12);
+  color: var(--text-main);
+  font-size: 1.2rem;
+  font-weight: 600;
+}
 
 @media (max-width: 768px) {
   html {
@@ -241,10 +202,6 @@ svg {
     font-size: 3rem;
   }
 }
-
-/* =========================
-   ACCESIBILIDAD
-========================= */
 
 @media (prefers-reduced-motion: reduce) {
   *,
